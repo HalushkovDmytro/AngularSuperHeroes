@@ -1,0 +1,146 @@
+.form-container{
+  box-sizing: border-box;
+  height: 100vh;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  background: url("./images/background.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+
+  .main-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 30px;
+    width: 400px;
+    height: 400px;
+    background-color: white;
+    position: absolute;
+    bottom: 15%;
+    left: 36%;
+    border-radius: 10%;
+
+    .form-control {
+      margin: 10px 0;
+      border: none;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+
+      input {
+        width: 250px;
+        border: none;
+        border-bottom: 2px solid grey;
+        outline: none;
+        padding: 5px;
+
+      }
+
+      .ng-invalid.ng-touched,
+      .ng-valid.ng-touched.invalidEnter{
+        border-bottom: 2px solid red;
+      }
+
+      .ng-valid.ng-touched{
+        border-bottom: 2px solid #32CD32;
+      }
+
+      small {
+        font-size: 12px;
+      }
+    }
+
+    .buttons-block {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      padding: 20px;
+
+
+      .btn {
+        font-weight: bold;
+        transition: all .4s ease;
+
+        font-size: 16px;
+        padding: 5px;
+        border: none;
+        background: none;
+        cursor: pointer;
+        &:hover {
+          color: red;
+        }
+      }
+      .submit{
+        color: #fff;
+        text-transform: uppercase;
+        background-color: red;
+        padding: 5px 10px;
+        border:1px solid transparent;
+
+        &:hover {
+          color: #000;
+          border:1px solid red;
+          background-color: transparent;
+        }
+
+        &:active{
+          border:1px solid transparent;
+          color: red;
+        }
+      }
+    }
+
+    .validation {
+      color: red;
+      font-weight: bold;
+    }
+
+    .error-container{
+      position: absolute;
+      top: 20%;
+      left: calc(50% - 163px);
+      margin: 0 auto 20px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: darkgrey;
+      padding: 15px 30px;
+
+      .error-text{
+        color: darkred;
+        font-size: 20px;
+      }
+    }
+
+    .sessionExp-container{
+      position: absolute;
+      top: 15%;
+      left: 0;
+      margin: 0 auto 20px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 15px 25px;
+
+      .sessionExpiredMessage{
+        color: red;
+        font-size: 24px;
+      }
+
+      .logAgainMessage{
+        color: red;
+        font-size: 17px;
+      }
+    }
+  }
+}
+
