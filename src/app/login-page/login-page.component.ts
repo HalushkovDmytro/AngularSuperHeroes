@@ -1,9 +1,9 @@
-import {Component, OnInit} from '@angular/core';
-import {FormControl, FormGroup, Validators} from "@angular/forms";
-import {ActivatedRoute, Params, Router} from "@angular/router";
-import {UserValidators} from "../validators";
-import {AuthService} from "../auth.service";
-import {CreateUserPageComponent} from "../create-user-page/create-user-page.component";
+import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup, Validators } from "@angular/forms";
+import { ActivatedRoute, Params, Router } from "@angular/router";
+import { UserValidators } from "../validators";
+import { AuthService } from "../auth.service";
+import { CreateUserPageComponent } from "../create-user-page/create-user-page.component";
 
 @Component({
   selector: 'app-login-page',
@@ -56,18 +56,19 @@ export class LoginPageComponent implements OnInit {
     return this.form.get('password');
   }
 
-  public submit(){
-    if (this.form.valid){
-
-      if (this.registeredUser(this.form.value.email, this.form.value.password)){
-        this.auth.login(this.form.value)
-        this.router.navigate(['/main/selection-page'])
-      } else {
-        this.invalidEnter = true
-        setTimeout(() => {
-          this.invalidEnter = false
-        }, 2000)
-      }
+public submit(): void{
+    if (this.form.invalid){
+      return
+    }
+    
+    if (this.registeredUser(this.form.value.email, this.form.value.password)){
+      this.auth.login(this.form.value)
+      this.router.navigate(['/main/selection-page'])
+    } else {
+      this.invalidEnter = true
+      setTimeout(() => {
+        this.invalidEnter = false
+      }, 2000)
     }
   }
 
