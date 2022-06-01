@@ -1,0 +1,92 @@
+<div class="form-container">
+  <form
+    class="main-form"
+    id="main-form"
+    [formGroup]="form"
+    (ngSubmit)="submit()">
+
+    <div
+      *ngIf="invalidEnter"
+      class="error-container">
+      <p
+        class="error-text">
+        There is no user with this email
+      </p>
+    </div>
+
+    <div
+      *ngIf="sessionExpiredMessage"
+      class="sessionExp-container">
+      <p
+        class="sessionExpiredMessage">
+        {{sessionExpiredMessage}}
+      </p>
+      <p
+        class="logAgainMessage">
+        {{logAgainMessage}}
+      </p>
+    </div>
+
+    <div
+      [ngClass]="{invalid: requiredEmail!.touched && requiredEmail!.invalid}"
+      class="form-control">
+      <input
+        [ngClass]="{invalidEnter: invalidEnter}"
+        id="email"
+        type="email"
+        placeholder="Email:"
+        formControlName="email">
+      <div
+        *ngIf="requiredEmail!.touched && requiredEmail!.invalid"
+        class="validation">
+
+        <small *ngIf="requiredEmail!.errors!.required">
+          Please, enter your email.
+        </small>
+        <small *ngIf="requiredEmail!.errors!.customEmail">
+          Provide a valid email.
+        </small>
+
+      </div>
+    </div>
+
+    <div
+      [ngClass]="{invalid: form.get('password')!.touched && form.get('password')!.invalid}"
+      class="form-control">
+      <input
+        [ngClass]="{invalidEnter: invalidEnter}"
+        id="password"
+        type="password"
+        placeholder="Password:"
+        formControlName="password">
+      <div *ngIf="requiredPassword!.touched && form.get('password')!.invalid"
+           class="validation">
+        <small *ngIf="requiredPassword!.errors!.required"
+        >Please, enter your password.
+        </small>
+        <small *ngIf="requiredPassword!.errors!.customPassword"
+        >Provide a valid password.
+        </small>
+        <small *ngIf="requiredPassword!.errors!.minlength">
+          Password must be at least {{requiredPassword!.errors!.minlength.requiredLength}} symbols.
+          <br/>Now it contains {{requiredPassword!.errors!.minlength.actualLength}} symbols.
+        </small>
+      </div>
+    </div>
+    <div
+      class="btn buttons-block">
+      <button
+        class="btn submit"
+        type="submit"
+        value="sign-in"
+        [disabled]="form.invalid"
+      >Sign in</button>
+      <a
+        class="btn form-link"
+        [routerLink]="['/create-new-user']"
+      >Create new user</a>
+    </div>
+  </form>
+
+</div>
+
