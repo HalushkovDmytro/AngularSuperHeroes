@@ -2,7 +2,8 @@
   <form
     class="main-form"
     [formGroup]="form"
-    (ngSubmit)="submit()">
+    (ngSubmit)="submit()"
+  >
 
     <div
       *ngIf="invalidEnter"
@@ -52,7 +53,8 @@
 
     <div
       [class.invalid]="requiredPassword!.touched && requiredPassword!.invalid"
-      class="form-control">
+      class="form-control"
+    >
       <input
         [class.invalidEnter]="invalidEnter"
         type="password"
@@ -82,7 +84,8 @@
         value="sign-in"
         [disabled]="form.invalid"
       >
-        Sign in</button>
+        Sign in
+      </button>
       <a
         class="btn form-link"
         [routerLink]="['/create-new-user']"
