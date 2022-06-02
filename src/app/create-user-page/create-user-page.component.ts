@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { UserValidators } from "../validators";
 import { UsersData } from "../interfaces";
-import {UsersService} from "../users.service";
+import { UsersService } from "../users.service";
 
 @Component({
   selector: 'app-create-user-page',
@@ -16,14 +16,26 @@ export class CreateUserPageComponent implements OnInit {
     userName: new FormControl('')
   });
   public created: boolean = false;
+  
+  public get requiredEmail(): AbstractControl | null {
+    return this.form.get('email');
+  };
+
+  public get requiredPassword(): AbstractControl | null {
+    return this.form.get('password');
+  };
+
+  public get requiredUsername(): AbstractControl | null {
+    return this.form.get('userName');
+  };
 
   constructor(private _users: UsersService) {}
 
   public ngOnInit(): void {
-    this.formCreation();
+    this.createForm();
   };
 
-  public formCreation(): void {
+  public createForm(): void {
     this.form = new FormGroup({
       email: new FormControl('', [
         Validators.required,
@@ -59,24 +71,12 @@ export class CreateUserPageComponent implements OnInit {
     );
   };
 
-  public get requiredEmail(): AbstractControl | null {
-    return this.form.get('email');
-  };
-
-  public get requiredPassword(): AbstractControl | null {
-    return this.form.get('password');
-  };
-
-  public get requiredUsername(): AbstractControl | null {
-    return this.form.get('userName');
-  };
-
   private _addUser(user: UsersData): void {
-    const sameUser = UsersService.allUsers.some((item) => item.email === user.email);
+    const sameUser = this._users.allUsers.some((item) => item.email === user.email);
 
     if (!sameUser) {
       UsersService.allUsers.push(user);
-      localStorage['users'] = JSON.stringify(UsersService.allUsers);
+      localStorage['users'] = JSON.stringify(this._users.allUsers);
     }
   };
 
