@@ -1,6 +1,6 @@
 import { AbstractControl, ValidationErrors } from "@angular/forms";
 import { Regexp } from "./regexp";
-import {UsersService} from "./users.service";
+import { UsersService } from "./users.service";
 
 export class UserValidators {
   static validEmail(control: AbstractControl): ValidationErrors | null {
