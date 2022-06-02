@@ -1,9 +1,9 @@
-import {Component, OnInit} from '@angular/core';
-import {FormControl, FormGroup, Validators} from "@angular/forms";
-import {ActivatedRoute, Params, Router} from "@angular/router";
-import {UserValidators} from "../validators";
-import {AuthService} from "../auth.service";
-import {UsersService} from "../users.service";
+import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup, Validators } from "@angular/forms";
+import { ActivatedRoute, Params, Router } from "@angular/router";
+import { UserValidators } from "../validators";
+import { AuthService } from "../auth.service";
+import { UsersService } from "../users.service";
 
 @Component({
   selector: 'app-login-page',
@@ -24,6 +24,7 @@ export class LoginPageComponent implements OnInit {
     private _auth: AuthService,
     private _router: Router,
     private _route: ActivatedRoute,
+    private _users: UsersService
   ){}
 
   public ngOnInit(): void {
@@ -79,7 +80,7 @@ export class LoginPageComponent implements OnInit {
   }
 
   private registeredUser(email: string, password: string): boolean {
-    return UsersService.allUsers.some((item) => item.email === email && item.password === password);
+    return this._users.allUsers.some((item) => item.email === email && item.password === password);
   }
 
 }
