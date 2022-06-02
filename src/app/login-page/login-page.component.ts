@@ -19,7 +19,15 @@ export class LoginPageComponent implements OnInit {
   public invalidEnter: boolean = false;
   public sessionExpiredMessage: string = '';
   public logAgainMessage: string = '';
+  
+  public get requiredEmail(): AbstractControl | null {
+    return this.form.get('email');
+  }
 
+  public get requiredPassword(): AbstractControl | null {
+    return this.form.get('password');
+  }
+  
   constructor(
     private _auth: AuthService,
     private _router: Router,
@@ -28,11 +36,11 @@ export class LoginPageComponent implements OnInit {
   ){}
 
   public ngOnInit(): void {
-    this.formCreation();
-    this.paramsSubscribe();
+    this.createForm();
+    this.addParamsListener();
   }
 
-  public formCreation() {
+  public createForm() {
     this.form = new FormGroup({
       email: new FormControl('', [
         Validators.required,
@@ -46,7 +54,7 @@ export class LoginPageComponent implements OnInit {
     });
   }
 
-  public paramsSubscribe() {
+  public addParamsListener() {
     this._route.queryParams.subscribe((params: Params) => {
       if (params['loginAgain']) {
         this.sessionExpiredMessage = 'Your current session has expired.';
@@ -69,14 +77,6 @@ export class LoginPageComponent implements OnInit {
         this.invalidEnter = false;
       }, 2000)
     }
-  }
-
-  public get requiredEmail(): AbstractControl | null {
-    return this.form.get('email');
-  }
-
-  public get requiredPassword(): AbstractControl | null {
-    return this.form.get('password');
   }
 
   private registeredUser(email: string, password: string): boolean {
