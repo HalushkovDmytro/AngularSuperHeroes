@@ -1,0 +1,112 @@
+<div class="form-container">
+  <form
+    class="main-form"
+    [formGroup]="form"
+    (ngSubmit)="submit()"
+  >
+
+    <div
+      *ngIf="created"
+      class="created-container"
+    >
+      <p class="created-text">
+        User successfully created
+      </p>
+    </div>
+
+    <div
+      [class.invalid]="requiredEmail!.touched && requiredEmail!.invalid"
+      class="form-control"
+    >
+      <input
+        type="email"
+        placeholder="Email:"
+        formControlName="email"
+      >
+      <div
+        *ngIf="requiredEmail!.touched && requiredEmail!.invalid"
+        class="validation"
+      >
+        <small *ngIf="requiredEmail!.errors!.required && requiredEmail!.value === ''">
+          Please, enter your email.
+        </small>
+        <small *ngIf="requiredEmail!.errors!.customEmail && requiredEmail!.value !== ''">
+          Provide a valid email.
+        </small>
+        <small *ngIf="requiredEmail!.errors!.hasMatch">
+          User with this email already exist.
+        </small>
+      </div>
+    </div>
+
+    <div
+      [class.invalid]="requiredPassword!.touched && requiredPassword!.invalid"
+      class="form-control"
+    >
+      <input
+        type="password"
+        placeholder="Password:"
+        formControlName="password">
+      <div
+        *ngIf="requiredPassword!.touched && requiredPassword!.invalid"
+        class="validation"
+      >
+        <small *ngIf="requiredPassword!.errors!.required && requiredPassword!.value === ''">
+          Please, enter your password.
+        </small>
+        <small *ngIf="requiredPassword!.errors!.minlength">
+          Password must be at least {{requiredPassword!.errors!.minlength.requiredLength}} symbols.
+          <br/>Now it contains {{requiredPassword!.errors!.minlength.actualLength}} symbols.
+        </small>
+        <small *ngIf="requiredPassword!.errors!.customPassword && requiredPassword!.value !== ''">
+          Provide a valid password.
+        </small>
+      </div>
+    </div>
+
+    <div
+      [class.invalid]="requiredUsername!.touched && requiredUsername!.invalid"
+      class="form-control"
+    >
+      <input
+        type="text"
+        placeholder="User name:"
+        formControlName="userName"
+      >
+      <div
+        *ngIf="requiredUsername!.touched && requiredUsername!.invalid"
+        class="validation"
+      >
+        <small *ngIf="requiredUsername!.errors!.required && requiredUsername!.value === ''">
+          Please, enter your user name.
+        </small>
+        <small *ngIf="requiredUsername!.errors!.minlength">
+          User name must be at least {{requiredUsername!.errors!.minlength!.requiredLength}} symbols.
+          <br/>Now it contains {{requiredUsername!.errors!.minlength!.actualLength}} symbols.
+        </small>
+        <small *ngIf="requiredUsername!.errors!.customName">
+          Provide a valid user name.
+        </small>
+      </div>
+    </div>
+
+    <div class="buttons-block">
+      <button
+        class="btn submit"
+        type="submit"
+        value="create"
+        [disabled]="created"
+        [class.alreadyCreated]="created"
+      >
+        Create new user
+      </button>
+      <a
+        class="btn form-link"
+        [routerLink]="['/login-page']"
+      >
+        Sign in
+      </a>
+    </div>
+
+  </form>
+</div>
