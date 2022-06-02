@@ -1,4 +1,4 @@
-.form-container{
+.form-container {
   box-sizing: border-box;
   height: 100vh;
   width: 100%;
@@ -37,15 +37,14 @@
         border-bottom: 2px solid grey;
         outline: none;
         padding: 5px;
-
       }
 
       .ng-invalid.ng-touched,
-      .ng-valid.ng-touched.invalidEnter{
+      .ng-valid.ng-touched.invalidEnter {
         border-bottom: 2px solid red;
       }
 
-      .ng-valid.ng-touched{
+      .ng-valid.ng-touched {
         border-bottom: 2px solid #32CD32;
       }
 
@@ -68,17 +67,18 @@
       .btn {
         font-weight: bold;
         transition: all .4s ease;
-
         font-size: 16px;
         padding: 5px;
         border: none;
         background: none;
         cursor: pointer;
+
         &:hover {
           color: red;
         }
       }
-      .submit{
+
+      .submit {
         color: #fff;
         text-transform: uppercase;
         background-color: red;
@@ -91,7 +91,7 @@
           background-color: transparent;
         }
 
-        &:active{
+        &:active {
           border:1px solid transparent;
           color: red;
         }
@@ -103,7 +103,7 @@
       font-weight: bold;
     }
 
-    .error-container{
+    .error-container {
       position: absolute;
       top: 20%;
       left: calc(50% - 163px);
@@ -114,13 +114,13 @@
       background-color: darkgrey;
       padding: 15px 30px;
 
-      .error-text{
+      .error-text {
         color: darkred;
         font-size: 20px;
       }
     }
 
-    .sessionExp-container{
+    .sessionExp-container {
       position: absolute;
       top: 15%;
       left: 0;
@@ -131,12 +131,12 @@
       align-items: center;
       padding: 15px 25px;
 
-      .sessionExpiredMessage{
+      .sessionExpiredMessage {
         color: red;
         font-size: 22px;
       }
 
-      .logAgainMessage{
+      .logAgainMessage {
         color: red;
         font-size: 17px;
       }

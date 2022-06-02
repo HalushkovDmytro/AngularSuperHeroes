@@ -3,7 +3,7 @@ import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {ActivatedRoute, Params, Router} from "@angular/router";
 import {UserValidators} from "../validators";
 import {AuthService} from "../auth.service";
-import {CreateUserPageComponent} from "../create-user-page/create-user-page.component";
+import {UsersService} from "../users.service";
 
 @Component({
   selector: 'app-login-page',
@@ -11,30 +11,27 @@ import {CreateUserPageComponent} from "../create-user-page/create-user-page.comp
   styleUrls: ['./login-page.component.scss']
 })
 export class LoginPageComponent implements OnInit {
-
   public form: FormGroup = new FormGroup({
     email: new FormControl(''),
     password: new FormControl(''),
-  })
+  });
   public submitted: boolean = false;
   public invalidEnter: boolean = false;
   public sessionExpiredMessage: string = '';
   public logAgainMessage: string = '';
 
   constructor(
-    private auth: AuthService,
-    private router: Router,
-    private route: ActivatedRoute
-  ){
+    private _auth: AuthService,
+    private _router: Router,
+    private _route: ActivatedRoute,
+  ){}
+
+  public ngOnInit(): void {
+    this.formCreation();
+    this.paramsSubscribe();
   }
 
-  ngOnInit(): void {
-    this.route.queryParams.subscribe((params: Params) => {
-      if (params['loginAgain']){
-        this.sessionExpiredMessage = 'Your current session has expired.'
-        this.logAgainMessage = 'Please login again to continue using this app!'
-      }
-    })
+  public formCreation() {
     this.form = new FormGroup({
       email: new FormControl('', [
         Validators.required,
@@ -45,34 +42,44 @@ export class LoginPageComponent implements OnInit {
         Validators.minLength(5),
         UserValidators.validPassword
       ]),
+    });
+  }
+
+  public paramsSubscribe() {
+    this._route.queryParams.subscribe((params: Params) => {
+      if (params['loginAgain']) {
+        this.sessionExpiredMessage = 'Your current session has expired.';
+        this.logAgainMessage = 'Please login again to continue using this app!';
+      }
     })
   }
 
-  public get requiredEmail(){
-    return this.form.get('email');
-  }
+  public submit(): void {
+    if (this.form.invalid) {
+      return;
+    }
 
-  public get requiredPassword(){
-    return this.form.get('password');
-  }
-
-  public submit(){
-    if (this.form.valid){
-
-      if (this.registeredUser(this.form.value.email, this.form.value.password)){
-        this.auth.login(this.form.value)
-        this.router.navigate(['/main/selection-page'])
-      } else {
-        this.invalidEnter = true
-        setTimeout(() => {
-          this.invalidEnter = false
-        }, 2000)
-      }
+    if (this.registeredUser(this.form.value.email, this.form.value.password)) {
+      this._auth.login(this.form.value);
+      this._router.navigate(['/main/selection-page']);
+    } else {
+      this.invalidEnter = true;
+      setTimeout(() => {
+        this.invalidEnter = false;
+      }, 2000)
     }
   }
 
+  public get requiredEmail() {
+    return this.form.get('email');
+  }
+
+  public get requiredPassword() {
+    return this.form.get('password');
+  }
+
   private registeredUser(email: string, password: string): boolean {
-    return CreateUserPageComponent.allUsers.some((item) => item.email === email && item.password === password)
+    return UsersService.allUsers.some((item) => item.email === email && item.password === password);
   }
 
 }
