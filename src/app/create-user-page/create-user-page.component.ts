@@ -75,7 +75,7 @@ export class CreateUserPageComponent implements OnInit {
     const sameUser = this._users.allUsers.some((item) => item.email === user.email);
 
     if (!sameUser) {
-      UsersService.allUsers.push(user);
+      this._users.allUsers.push(user);
       localStorage['users'] = JSON.stringify(this._users.allUsers);
     }
   };
