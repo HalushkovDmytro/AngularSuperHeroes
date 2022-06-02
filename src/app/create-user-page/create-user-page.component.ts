@@ -59,22 +59,22 @@ export class CreateUserPageComponent implements OnInit {
     );
   };
 
-  public get requiredEmail() {
+  public get requiredEmail(): AbstractControl | null {
     return this.form.get('email');
   };
 
-  public get requiredPassword() {
+  public get requiredPassword(): AbstractControl | null {
     return this.form.get('password');
   };
 
-  public get requiredUsername() {
+  public get requiredUsername(): AbstractControl | null {
     return this.form.get('userName');
   };
 
   private _addUser(user: UsersData): void {
     const sameUser = UsersService.allUsers.some((item) => item.email === user.email);
 
-    if (!sameUser){
+    if (!sameUser) {
       UsersService.allUsers.push(user);
       localStorage['users'] = JSON.stringify(UsersService.allUsers);
     }
