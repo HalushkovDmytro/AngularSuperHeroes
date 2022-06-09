@@ -11,12 +11,12 @@ export class AlphabetSearchComponent {
   public showLetter: boolean = false
   public letter: string = 'a'
 
-  constructor(private selectionPage: SelectionPageComponent) {}
+  constructor(private _selectionPage: SelectionPageComponent) {}
 
   public alphabetSearch(letter: string): void {
-    this.selectionPage.form.controls.heroSearch.setValue(letter);
-    this.selectionPage.addToRecentSearch(letter);
-    this.selectionPage.submit();
+    this._selectionPage.form.controls.heroSearch.setValue(letter);
+    this._selectionPage.addToRecentSearch(letter);
+    this._selectionPage.submit();
     this.letter = letter;
     this.showLetter = !this.showLetter;
   }
