@@ -20,5 +20,4 @@ export class AlphabetSearchComponent {
     this.letter = letter;
     this.showLetter = !this.showLetter;
   }
-
 }
