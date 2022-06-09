@@ -37,6 +37,7 @@ export class SelectionPageComponent implements OnInit {
 
   private _setLastSearch(): void {
     const lastIndex: number = this.recentSearchArray.length - 1;
+    
     this.heroesService.lastSearch = this.recentSearchArray[lastIndex];
     localStorage["currentUser"] = JSON.stringify(
       {...JSON.parse(localStorage["currentUser"]),
