@@ -20,7 +20,10 @@ export class SelectionPageComponent implements OnInit {
   public get nameGetter(): AbstractControl | null {
     return this.form.get('heroSearch');
   }
-
+  
+  public get heroSearch(){
+    return this.form.value.heroSearch
+  }
   constructor(
     private _fb: FormBuilder,
     public heroesService: HeroesConfigService,
@@ -60,11 +63,9 @@ export class SelectionPageComponent implements OnInit {
       return
     }
 
-    const heroSearch = this.form.value.heroSearch
-
-    this.heroesService.lastSearch = heroSearch;
-    this.heroesService.getHeroes(heroSearch);
-    this.addToRecentSearch(heroSearch);
+    this.heroesService.lastSearch = this.heroSearch;
+    this.heroesService.getHeroes(this.heroSearch);
+    this.addToRecentSearch(this.heroSearch);
     this._setLastSearch();
   }
 
