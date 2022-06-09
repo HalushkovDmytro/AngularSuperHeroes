@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from "@angular/forms";
+import { FormControl, FormGroup, Validators, AbstractControl } from "@angular/forms";
 import { UserValidators } from "../validators";
 import { UsersData } from "../interfaces";
 import { UsersService } from "../users.service";
@@ -16,7 +16,7 @@ export class CreateUserPageComponent implements OnInit {
     userName: new FormControl('')
   });
   public created: boolean = false;
-  
+
   public get requiredEmail(): AbstractControl | null {
     return this.form.get('email');
   };
@@ -72,12 +72,12 @@ export class CreateUserPageComponent implements OnInit {
   };
 
   private _addUser(user: UsersData): void {
-    const sameUser = this._users.allUsers.some((item) => item.email === user.email);
+    const allUsersArray: UsersData[] = this._users.allUsers
+    const sameUser: boolean = allUsersArray.some((item) => item.email === user.email);
 
     if (!sameUser) {
-      this._users.allUsers.push(user);
-      localStorage['users'] = JSON.stringify(this._users.allUsers);
+      allUsersArray.push(user);
+      localStorage['users'] = JSON.stringify(allUsersArray);
     }
   };
-
 }

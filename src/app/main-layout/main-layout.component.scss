@@ -1,15 +1,60 @@
 .main-layout {
   box-sizing: border-box;
-  height: 100vh;
+  min-height: 100vh;
   width: 100%;
   margin: 0;
   padding: 0;
-  background: url("./images/main-background.jpg") fixed;
+  background-image: url("./images/main-background.jpg");
   background-repeat: no-repeat;
+  background-attachment: fixed;
   background-size: cover;
   position: relative;
 
-  .white {
-    color: #fff;
+  .header {
+    background-color: #0c57b3;
+    width: 100%;
+
+    .header-container {
+      padding: 0 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 50px;
+
+      .logo-container p {
+        color: #fff;
+        font-size: 18px;
+        font-weight: 700;
+      }
+
+      .info-block {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 180px;
+        font-size: 18px;
+        color: #fff;
+
+        .user-info {
+          border: 1px solid transparent;
+          border-radius: 15px;
+          padding: 5px 10px;
+          transition: all .4s ease-in-out;
+
+          &:hover {
+            background-color: rgba(255, 255, 255, 0.5)
+          }
+
+          &:active {
+            box-shadow: black;
+          }
+        }
+
+        .avatar {
+          text-transform: uppercase;
+          letter-spacing: 2px;
+        }
+      }
+    }
   }
 }

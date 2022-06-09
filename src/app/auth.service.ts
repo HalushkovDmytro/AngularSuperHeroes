@@ -5,12 +5,12 @@ import { UsersData } from "./interfaces";
 export class AuthService {
   private _isLogged: boolean = false
 
-  public static currentUserInit(usersData: UsersData): void {
+  private _currentUserInit(usersData: UsersData): void {
     localStorage.currentUser = JSON.stringify({...usersData, 'expiredSession': Date.now() + 3600000}) //1hour
   }
 
   public login(usersData: UsersData): void {
-    AuthService.currentUserInit(usersData);
+    this._currentUserInit(usersData);
     this._isLogged = true;
   }
 

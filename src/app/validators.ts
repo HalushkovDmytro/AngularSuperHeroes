@@ -4,7 +4,7 @@ import { UsersService } from "./users.service";
 
 export class UserValidators {
   private static _users: UsersService;
-  
+
   static validEmail(control: AbstractControl): ValidationErrors | null {
     return Regexp.matchingEmail(control.value) ? null : {customEmail: true}
   };
@@ -15,6 +15,10 @@ export class UserValidators {
 
   static validName(control: AbstractControl): ValidationErrors | null {
     return Regexp.matchingName(control.value) ? null : { customName: true }
+  };
+
+  static validSearchHeroes(control: AbstractControl): ValidationErrors | null {
+    return Regexp.matchingHeroSearch(control.value) ? null : { invalidName: true }
   };
 
   static noMatchEmail(control: AbstractControl): ValidationErrors | null {
