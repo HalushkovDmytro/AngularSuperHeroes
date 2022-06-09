@@ -11,7 +11,6 @@ import { newArray } from "@angular/compiler/src/util";
   styleUrls: ['./selection-page.component.scss']
 })
 export class SelectionPageComponent implements OnInit {
-
   public recentSearch: Set<string> = new Set();
   public recentSearchArray: string[] = Array.from(this.recentSearch);
   public form = this._fb.group({
@@ -32,6 +31,7 @@ export class SelectionPageComponent implements OnInit {
     if (!localStorage["recentSearch"]) {
       return
     }
+    
     JSON.parse(localStorage["recentSearch"]).forEach((item: string) => this.recentSearch.add(item));
   }
 
