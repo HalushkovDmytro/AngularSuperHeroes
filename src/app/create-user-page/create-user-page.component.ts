@@ -80,15 +80,4 @@ export class CreateUserPageComponent implements OnInit {
       localStorage['users'] = JSON.stringify(allUsersArray);
     }
   };
-
-  // public recent(str: string): void {
-  //   const recentSearch = this._users.recentSearch
-  //   const inRecSearch = recentSearch.some((item) => item === str);
-  //
-  //   if (!inRecSearch) {
-  //     recentSearch.push(str);
-  //     localStorage['users'] = JSON.stringify(recentSearch);
-  //   }
-  // };
-
 }
