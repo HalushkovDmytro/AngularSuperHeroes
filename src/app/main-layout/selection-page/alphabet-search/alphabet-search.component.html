@@ -1,8 +1,8 @@
 <div class="letter-container">
   <p
+    *ngIf="!showLetter"
     class="letter"
     (click)="showLetter = !showLetter"
-    *ngIf="!showLetter"
   >
     {{ letter }}
   </p>
@@ -12,9 +12,9 @@
     class="letterList"
   >
     <p
-      class="letter"
       *ngFor="let letter of alphabet"
-      (click)="alphabetSearch(letter)"
+      class="letter"
+     (click)="alphabetSearch(letter)"
     >
       {{ letter }}
     </p>
