@@ -27,7 +27,11 @@ export class LoginPageComponent implements OnInit {
   public get requiredPassword(): AbstractControl | null {
     return this.form.get('password');
   }
-
+  
+  public get formValue(){
+    return this.form.value
+  };
+  
   constructor(
     private _auth: AuthService,
     private _router: Router,
@@ -68,10 +72,8 @@ export class LoginPageComponent implements OnInit {
       return;
     }
 
-    const formValue = this.form.value;
-
-    if (this.registeredUser(formValue.email, formValue.password)) {
-      this._auth.login(formValue);
+    if (this._registeredUser(this.formValue.email, this.formValue.password)) {
+      this._auth.login(this.formValue);
       this._router.navigate(['/main/selection-page']);
     } else {
       this.invalidEnter = true;
@@ -81,7 +83,7 @@ export class LoginPageComponent implements OnInit {
     }
   }
 
-  private registeredUser(email: string, password: string): boolean {
+  private _registeredUser(email: string, password: string): boolean {
     return this._users.allUsers.some((item) => item.email === email && item.password === password);
   }
 
