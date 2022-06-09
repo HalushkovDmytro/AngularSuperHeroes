@@ -25,9 +25,25 @@
           [alt]="hero.name"
         >
         <div class="block-btn">
-          <button (click)="selectHero($event)" [id]="hero.id" class="btn btn-select">Select</button>
-          <button *ngIf="trySelected(hero.id)" class="btn btn-selected">Selected</button>
-          <button *ngIf="tryOwned(hero.id)" class="btn btn-owned">Owned</button>
+          <button 
+              class="btn btn-select" 
+              [id]="hero.id" 
+              (click)="selectHero($event)"
+          >
+            Select
+          </button>
+          <button 
+              *ngIf="trySelected(hero.id)" 
+              class="btn btn-selected"
+          >
+            Selected
+          </button>
+          <button 
+              *ngIf="tryOwned(hero.id)" 
+              class="btn btn-owned"
+          >
+            Owned
+          </button>
         </div>
       </div>
     </div>
