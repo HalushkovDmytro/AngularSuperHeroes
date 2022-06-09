@@ -1,0 +1,22 @@
+<div class="letter-container">
+  <p
+    class="letter"
+    (click)="showLetter = !showLetter"
+    *ngIf="!showLetter"
+  >
+    {{ letter }}
+  </p>
+
+  <div
+    *ngIf="showLetter"
+    class="letterList"
+  >
+    <p
+      class="letter"
+      *ngFor="let letter of alphabet"
+      (click)="alphabetSearch(letter)"
+    >
+      {{ letter }}
+    </p>
+  </div>
+</div>

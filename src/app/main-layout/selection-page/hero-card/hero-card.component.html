@@ -1,0 +1,35 @@
+<div
+  *ngFor="let hero of heroesService.heroesArr"
+  class="heroes-container"
+     >
+  <div
+    *ngIf="hero.powerstats.combat !== 'null'"
+    class="hero"
+  >
+    <h3 class="hero-name">
+      {{ hero.name }}
+    </h3>
+    <div class="hero-content">
+      <div class="hero-stats">
+        <p>combat: {{ hero.powerstats.combat }}</p>
+        <p>durability: {{ hero.powerstats.durability }}</p>
+        <p>intelligence: {{ hero.powerstats.intelligence }}</p>
+        <p>power: {{ hero.powerstats.power }}</p>
+        <p>speed: {{ hero.powerstats.speed }}</p>
+        <p>strength: {{ hero.powerstats.strength }}</p>
+      </div>
+      <div class="hero-visual">
+        <img
+          class="hero-img"
+          [src]="hero.image.url"
+          [alt]="hero.name"
+        >
+        <div class="block-btn">
+          <button (click)="selectHero($event)" [id]="hero.id" class="btn btn-select">Select</button>
+          <button *ngIf="trySelected(hero.id)" class="btn btn-selected">Selected</button>
+          <button *ngIf="tryOwned(hero.id)" class="btn btn-owned">Owned</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

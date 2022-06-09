@@ -1,0 +1,64 @@
+<div class="container">
+
+    <app-alphabet-search
+      class="alphabet"
+    ></app-alphabet-search>
+
+  <div class="form-container">
+    <form
+      [formGroup]="form"
+      (ngSubmit)="submit()"
+      class="form"
+    >
+      <div
+        *ngIf="nameGetter!.invalid && nameGetter!.touched"
+        class="validation"
+      >
+        <p *ngIf="nameGetter!.errors!.required">
+          Please enter the name...
+        </p>
+        <p *ngIf="nameGetter!.errors!.invalidName && nameGetter!.value !== ''">
+          Invalid name
+        </p>
+      </div>
+
+      <div class="search-box">
+        <input
+          class="heroes-search"
+          type="text"
+          formControlName="heroSearch"
+          placeholder="Enter name..."
+        >
+        <button
+          type="submit"
+          class="search-btn"
+          [disabled]="form.invalid">
+          <i class="fa-solid fa-magnifying-glass"></i>
+        </button>
+      </div>
+    </form>
+    <div class="recent-searches">
+      <app-recent-search
+          *ngFor="let item of recentSearch"
+          (click)="searchFromRecent(item)"
+          [item]="item"
+      ></app-recent-search>
+    </div>
+
+    <app-hero-card
+      *ngIf="!heroesService.noHeroError"
+    ></app-hero-card>
+
+    <div
+      *ngIf="heroesService.noHeroError"
+      class="error-container"
+    >
+      <p class="no-hero">
+        character with given name not found
+      </p>
+    </div>
+  </div>
+
+</div>
+
+

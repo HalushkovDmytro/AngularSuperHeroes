@@ -1,0 +1,98 @@
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 50px 20px;
+
+  .alphabet-absolute {
+    flex: 2;
+  }
+
+  .form-container {
+    flex: 3;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    max-width: 500px;
+
+    .form {
+      position: relative;
+      display: flex;
+      justify-content: center;
+
+      .validation {
+        background-color: rgba(12, 87, 179, 0.8);
+        color: #ff0000;
+        padding: 5px 10px;
+        position: absolute;
+        top: 0;
+        left: 50%;
+        transform: translate(-45%, -120%);
+        font-size: 15px;
+        font-weight: bold;
+        min-width: 200px;
+        text-align: center;
+        border-radius: 10px;
+      }
+
+      .search-box {
+        position: relative;
+
+        .heroes-search {
+          min-width: 300px;
+          border-radius: 15px;
+          outline: none;
+          padding: 5px 10px;
+        }
+
+        .search-btn {
+          position: absolute;
+          right: 7px;
+          top: 5px;
+          border: none;
+          background-color: transparent;
+          cursor: pointer;
+
+          i {
+            font-size: 20px;
+
+            &:active {
+              transform: translate(1px, 2px);
+            }
+          }
+
+          img {
+            width: 25px;
+            height: 25px;
+          }
+        }
+      }
+    }
+
+    .recent-searches {
+      display: flex;
+      max-width: 300px;
+      justify-content: center;
+      margin: 0 auto 20px;
+      flex-wrap: wrap;
+    }
+
+    .error-container {
+      margin: 0 auto;
+      width: 500px;
+      display: flex;
+      justify-content: center;
+      background-color: rgba(255, 255, 255, 0.8);
+      border-radius: 10px;
+      border: 1px solid red;
+
+      .no-hero {
+        text-transform: uppercase;
+        color: red;
+        padding: 20px;
+      }
+    }
+  }
+}
+
+

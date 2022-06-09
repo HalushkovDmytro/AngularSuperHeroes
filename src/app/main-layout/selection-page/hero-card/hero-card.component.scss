@@ -1,0 +1,97 @@
+.heroes-container {
+  margin: 0 auto;
+  width: 500px;
+
+  .hero {
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 10px;
+    border: 1px solid black;
+    margin-bottom: 20px;
+    padding: 30px;
+
+    .hero-name {
+      text-align: center;
+      font-size: 30px;
+      font-weight: 700;
+      margin-bottom: 30px;
+    }
+
+    .hero-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      .hero-stats {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        min-height: 300px;
+
+        p {
+          font-size: 20px;
+          line-height: 1.5;
+          letter-spacing: 2px;
+          margin-bottom: 10px;
+        }
+      }
+
+      .hero-visual {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        position: relative;
+
+        .hero-img {
+          width: 200px;
+          margin-bottom: 20px;
+        }
+
+        .block-btn {
+          width: 100%;
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+          align-items: center;
+
+          .btn {
+            position: absolute;
+            padding: 4px 8px;
+            border: 1px solid transparent;
+            border-radius: 10px;
+            background-color: #ed7e00;
+            color: #000;
+            transition: all .4s ease;
+          }
+
+          .btn-select {
+            bottom: -15px;
+            left: 0;
+            cursor: pointer;
+
+            &:hover {
+              color: #ffffff;
+              background-color: #ed3b05;
+            }
+
+            &:active {
+              border: 1px solid #fff;
+            }
+          }
+
+          .btn-selected {
+            top: -35px;
+            right: 0;
+            background-color: #ff0303;
+            text-transform: uppercase;
+            color: #fff;
+          }
+
+          .btn-owned {
+            bottom: -15px;
+            right: 0;
+          }
+        }
+      }
+    }
+  }
+}

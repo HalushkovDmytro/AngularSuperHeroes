@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from "@angular/forms";
+import { FormControl, FormGroup, Validators, AbstractControl } from "@angular/forms";
 import { ActivatedRoute, Params, Router } from "@angular/router";
 import { UserValidators } from "../validators";
 import { AuthService } from "../auth.service";
@@ -19,7 +19,7 @@ export class LoginPageComponent implements OnInit {
   public invalidEnter: boolean = false;
   public sessionExpiredMessage: string = '';
   public logAgainMessage: string = '';
-  
+
   public get requiredEmail(): AbstractControl | null {
     return this.form.get('email');
   }
@@ -27,7 +27,7 @@ export class LoginPageComponent implements OnInit {
   public get requiredPassword(): AbstractControl | null {
     return this.form.get('password');
   }
-  
+
   constructor(
     private _auth: AuthService,
     private _router: Router,
@@ -68,8 +68,10 @@ export class LoginPageComponent implements OnInit {
       return;
     }
 
-    if (this.registeredUser(this.form.value.email, this.form.value.password)) {
-      this._auth.login(this.form.value);
+    const formValue = this.form.value;
+
+    if (this.registeredUser(formValue.email, formValue.password)) {
+      this._auth.login(formValue);
       this._router.navigate(['/main/selection-page']);
     } else {
       this.invalidEnter = true;

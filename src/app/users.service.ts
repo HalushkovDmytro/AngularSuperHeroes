@@ -6,4 +6,5 @@ export class UsersService {
   public allUsers: UsersData[] = JSON.parse(localStorage.getItem('users')!)
     ? JSON.parse(localStorage.getItem('users')!)
     : [];
+
 }
