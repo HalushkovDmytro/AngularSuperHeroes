@@ -8,11 +8,11 @@ import { HeroesConfigService } from "./selection-page/heroes.config.service";
 })
 export class MainLayoutComponent implements OnInit{
   
-  constructor(private heroesService: HeroesConfigService) {}
+  constructor(private _heroesService: HeroesConfigService) {}
   
   public ngOnInit(): void {
-    this.heroesService.initLastSearchLocalStorage();
-    this.heroesService.initOwnedHeroes();
-    this.heroesService.initSelectedHero();
+    this._heroesService.initLastSearchLocalStorage();
+    this._heroesService.initOwnedHeroes();
+    this._heroesService.initSelectedHero();
   }
 }
