@@ -6,9 +6,9 @@
 
   <div class="form-container">
     <form
+      class="form"
       [formGroup]="form"
       (ngSubmit)="submit()"
-      class="form"
     >
       <div
         *ngIf="nameGetter!.invalid && nameGetter!.touched"
@@ -30,9 +30,10 @@
           placeholder="Enter name..."
         >
         <button
+          class="search-btn"      
+          [disabled]="form.invalid"
           type="submit"
-          class="search-btn"
-          [disabled]="form.invalid">
+        >
           <i class="fa-solid fa-magnifying-glass"></i>
         </button>
       </div>
@@ -40,8 +41,8 @@
     <div class="recent-searches">
       <app-recent-search
           *ngFor="let item of recentSearch"
-          (click)="searchFromRecent(item)"
           [item]="item"
+          (click)="searchFromRecent(item)"
       ></app-recent-search>
     </div>
 
