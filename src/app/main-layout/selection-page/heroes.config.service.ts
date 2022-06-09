@@ -25,13 +25,14 @@ export class HeroesConfigService {
   }
 
   public showHeroes(response: any): void {
-    if (response.response === 'success') {
+    const success: string = 'success'
+    
+    if (response.response === success) {
       this.heroesArr = response.results
       this.noHeroError = ''
-    } else if (response.response === 'error') {
-      this.noHeroError = response.error
-      console.log(response.error)
-    }
+    } 
+
+     this.noHeroError = response.error
   }
 
   public initOwnedHeroes(): void {
