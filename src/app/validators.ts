@@ -22,6 +22,6 @@ export class UserValidators {
   };
 
   static noMatchEmail(control: AbstractControl): ValidationErrors | null {
-    return this?._users?.allUsers.some((user) => user.email === control.value) ? { hasMatch: true } : null
+    return this._users.allUsers.some((user) => user.email === control.value) ? { hasMatch: true } : null
   };
 }
