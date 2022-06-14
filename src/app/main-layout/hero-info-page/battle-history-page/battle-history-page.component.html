@@ -1,0 +1,14 @@
+<table>
+  <tr>
+    <th>Battle date</th>
+    <th>Hero name</th>
+    <th>Opponent name</th>
+    <th>Battle result</th>
+  </tr>
+  <tr *ngFor="let battle of someArray; trackBy: trackBy">
+    <td>{{ battle.battleDate }}</td>
+    <td (click)="heroesInfoService.redirectToHero(battle.heroId)">{{ battle.heroName }}</td>
+    <td (click)="heroesInfoService.redirectToHero(battle.enemyId)">{{ battle.enemyName }}</td>
+    <td>{{ battle.battleResult }}</td>
+  </tr>
+</table>

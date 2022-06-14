@@ -30,7 +30,7 @@
           placeholder="Enter name..."
         >
         <button
-          class="search-btn"      
+          class="search-btn"
           [disabled]="form.invalid"
           type="submit"
         >
@@ -46,18 +46,23 @@
       ></app-recent-search>
     </div>
 
-    <app-hero-card
-      *ngIf="!heroesService.noHeroError"
-    ></app-hero-card>
-
     <div
-      *ngIf="heroesService.noHeroError"
-      class="error-container"
+      *ngIf="!heroesService.noHeroError; else heroError"
     >
-      <p class="no-hero">
-        character with given name not found
-      </p>
+      <app-hero-card
+        *ngFor="let hero of heroesService.heroesArr; trackBy: trackBy"
+        [hero] ="hero"
+      ></app-hero-card>
     </div>
+
+    <ng-template #heroError>
+      <div class="error-container">
+        <p class="no-hero">
+          character with given name not found
+        </p>
+      </div>
+    </ng-template>
+
   </div>
 
 </div>

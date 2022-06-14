@@ -3,7 +3,7 @@ import { UsersData } from "./interfaces";
 
 @Injectable({providedIn: 'root'})
 export class UsersService {
-  public allUsers: UsersData[] = JSON.parse(localStorage.getItem('users')!)
+  public static allUsers: UsersData[] = JSON.parse(localStorage.getItem('users')!)
     ? JSON.parse(localStorage.getItem('users')!)
     : [];
 }

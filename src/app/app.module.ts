@@ -13,6 +13,11 @@ import { SelectionPageComponent } from "./main-layout/selection-page/selection-p
 import { AlphabetSearchComponent } from './main-layout/selection-page/alphabet-search/alphabet-search.component';
 import { RecentSearchComponent } from './main-layout/selection-page/recent-search/recent-search.component';
 import { HeroCardComponent } from './main-layout/selection-page/hero-card/hero-card.component';
+import { UsersHeroInfoPageComponent } from './main-layout/hero-info-page/users-hero-info-page.component';
+import { HeroesListComponent } from './main-layout/hero-info-page/heroes-list/heroes-list.component';
+import { BattleHistoryPageComponent } from './main-layout/hero-info-page/battle-history-page/battle-history-page.component';
+import { PowerUpsComponent } from './main-layout/hero-info-page/power-ups/power-ups.component';
+import { HeroInfoViewComponent } from './hero-info-view/hero-info-view.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +29,11 @@ import { HeroCardComponent } from './main-layout/selection-page/hero-card/hero-c
     AlphabetSearchComponent,
     RecentSearchComponent,
     HeroCardComponent,
+    UsersHeroInfoPageComponent,
+    HeroesListComponent,
+    BattleHistoryPageComponent,
+    PowerUpsComponent,
+    HeroInfoViewComponent,
   ],
   imports: [
     BrowserModule,
