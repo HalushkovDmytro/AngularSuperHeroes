@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { PowerUp } from "../../../interfaces";
 
 @Component({
@@ -6,10 +6,14 @@ import { PowerUp } from "../../../interfaces";
   templateUrl: './power-ups.component.html',
   styleUrls: ['./power-ups.component.scss']
 })
-export class PowerUpsComponent {
+export class PowerUpsComponent implements OnInit {
 
   public powerUpsArray: PowerUp[] = JSON.parse(localStorage["powerUps"]);
-
+  
+  public ngOnInit(): void {
+    this.powerUpsArray.sort((a,b) => b.usesLeft - a.usesLeft)
+  }
+  
   public trackBy(index: number, item: any): PowerUp {
     return item
   }
