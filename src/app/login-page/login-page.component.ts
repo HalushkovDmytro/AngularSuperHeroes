@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators, AbstractControl } from "@angular/forms";
 import { ActivatedRoute, Params, Router } from "@angular/router";
 import { UserValidators } from "../validators";
@@ -9,7 +9,9 @@ import { PowerUpService } from "../power-up.service";
 @Component({
   selector: 'app-login-page',
   templateUrl: './login-page.component.html',
-  styleUrls: ['./login-page.component.scss']
+  styleUrls: ['./login-page.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
+
 })
 export class LoginPageComponent implements OnInit {
   public form: FormGroup = new FormGroup({
@@ -37,7 +39,8 @@ export class LoginPageComponent implements OnInit {
     private _auth: AuthService,
     private _router: Router,
     private _route: ActivatedRoute,
-    private _users: UsersService
+    private _users: UsersService,
+    private _cd: ChangeDetectorRef
   ){}
 
   public ngOnInit(): void {
@@ -81,6 +84,7 @@ export class LoginPageComponent implements OnInit {
       this.invalidEnter = true;
       setTimeout(() => {
         this.invalidEnter = false;
+        this._cd.markForCheck()
       }, 2000)
     }
   }
