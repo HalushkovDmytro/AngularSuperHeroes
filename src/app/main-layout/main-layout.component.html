@@ -4,6 +4,15 @@
     <a class="logo-container" (click)="goToSelectionPage()" >
       <p>LOGO</p>
     </a>
+    <div class="fight-container">
+      <a
+        *ngIf="heroesService.selectedHero && params !== '/main/battle' "
+        class="fight-battle"
+        (click)="goToBattlePage()"
+      >
+        FIGHT
+      </a>
+    </div>
     <div class="info-block">
       <a class="user-info" (click)="goToUserInfo()">User info</a>
       <a class="avatar">avatar</a>
