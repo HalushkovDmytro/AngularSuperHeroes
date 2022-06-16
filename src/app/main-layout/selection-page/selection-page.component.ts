@@ -73,7 +73,7 @@ export class SelectionPageComponent implements OnInit {
     this.submit();
   }
 
-  public trackBy(index: number, item: any) {
+  public trackBy(index: number, item: string) {
     return item
   }
 }
