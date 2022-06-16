@@ -19,7 +19,7 @@ export class HeroInfoViewComponent implements OnInit {
     private _heroInfoService: HeroInfoService,
     private _heroConfigService: HeroesConfigService,
     private _http: HttpClient,
-    private _cdr: ChangeDetectorRef
+    private _cd: ChangeDetectorRef
     ) { }
 
   public ngOnInit(): void {
@@ -34,13 +34,12 @@ export class HeroInfoViewComponent implements OnInit {
     return this._http.get<Response>(this._getUrl())
       .subscribe((heroes) => {
         this._viewHero(heroes)
-        this._cdr.markForCheck()
+        this._cd.markForCheck()
       })
   }
 
   private _viewHero(response: Response): void {
-    this._cdr.markForCheck()
-    
+        
     if (response.results) {
       this.hero = response.results.find((hero: FetchResult) => hero.id === this._heroInfoService.heroId)
     }
