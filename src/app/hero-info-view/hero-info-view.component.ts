@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { HeroInfoService } from "./hero-info-service";
 import { HeroesConfigService } from "../main-layout/selection-page/heroes.config.service";
 import { FetchResult, Response } from "../interfaces";
@@ -9,6 +9,8 @@ import { HttpClient } from "@angular/common/http";
   selector: 'app-hero-info-view',
   templateUrl: './hero-info-view.component.html',
   styleUrls: ['./hero-info-view.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
+
 })
 export class HeroInfoViewComponent implements OnInit {
   public hero!: any;
@@ -16,7 +18,8 @@ export class HeroInfoViewComponent implements OnInit {
   constructor(
     private _heroInfoService: HeroInfoService,
     private _heroConfigService: HeroesConfigService,
-    private _http: HttpClient
+    private _http: HttpClient,
+    private _cdr: ChangeDetectorRef
     ) { }
 
   public ngOnInit(): void {
@@ -31,10 +34,13 @@ export class HeroInfoViewComponent implements OnInit {
     return this._http.get<Response>(this._getUrl())
       .subscribe((heroes) => {
         this._viewHero(heroes)
+        this._cdr.markForCheck()
       })
   }
 
   private _viewHero(response: Response): void {
+    this._cdr.markForCheck()
+    
     if (response.results) {
       this.hero = response.results.find((hero: FetchResult) => hero.id === this._heroInfoService.heroId)
     }
