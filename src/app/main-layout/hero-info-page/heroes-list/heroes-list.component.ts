@@ -15,11 +15,9 @@ export class HeroesListComponent {
   constructor(
     public heroesService: HeroesConfigService,
     private _router: Router,
-    private _cdr: ChangeDetectorRef
     ) {}
 
   public goToSelectPage(): void {
-    this._cdr.markForCheck()
     this._router.navigate(['main/selection-page']);
     window.scrollTo(0, 0);
   }
