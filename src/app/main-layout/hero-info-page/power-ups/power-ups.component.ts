@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { PowerUp } from "../../../interfaces";
 
 @Component({
   selector: 'app-power-ups',
   templateUrl: './power-ups.component.html',
-  styleUrls: ['./power-ups.component.scss']
+  styleUrls: ['./power-ups.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PowerUpsComponent implements OnInit {
 
