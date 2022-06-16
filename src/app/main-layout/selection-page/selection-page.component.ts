@@ -27,7 +27,6 @@ export class SelectionPageComponent implements OnInit {
   constructor(
     private _fb: FormBuilder,
     public heroesService: HeroesConfigService,
-    private _cdr: ChangeDetectorRef
   ) {}
 
   private _initRecentSearch(): void {
@@ -35,14 +34,12 @@ export class SelectionPageComponent implements OnInit {
       return
     }
     
-    this._cdr.markForCheck()
     JSON.parse(localStorage["recentSearch"]).forEach((item: string) => this.recentSearch.add(item));
   }
 
   private _setLastSearch(): void {
     const lastIndex: number = this.recentSearchArray.length - 1;
     
-    this._cdr.markForCheck()
     this.heroesService.lastSearch = this.recentSearchArray[lastIndex];
     localStorage["currentUser"] = JSON.stringify(
       {...JSON.parse(localStorage["currentUser"]),
@@ -55,7 +52,6 @@ export class SelectionPageComponent implements OnInit {
   }
 
   public addToRecentSearch(heroName: string): void {
-    this._cdr.markForCheck()
     this.recentSearch = new Set<string>([...this.recentSearch, heroName]);
     this.recentSearchArray = [...this.recentSearchArray, heroName];
     localStorage.setItem("recentSearch", JSON.stringify([ ...this.recentSearch]));
@@ -66,7 +62,6 @@ export class SelectionPageComponent implements OnInit {
       return
     }
     
-    this._cdr.markForCheck()
     this.heroesService.lastSearch = this.heroSearch;
     this.heroesService.getHeroes(this.heroSearch);
     this.addToRecentSearch(this.heroSearch);
@@ -74,7 +69,6 @@ export class SelectionPageComponent implements OnInit {
   }
 
   public searchFromRecent(item: string): void {
-    this._cdr.markForCheck()
     this.form.controls.heroSearch.setValue(item);
     this.submit();
   }
