@@ -5,7 +5,7 @@ import { HeroInfo } from "../../interfaces";
   selector: 'app-hero-info-page',
   templateUrl: './users-hero-info-page.component.html',
   styleUrls: ['./users-hero-info-page.component.scss'],
-
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class UsersHeroInfoPageComponent {
   @Input() hero!: HeroInfo
