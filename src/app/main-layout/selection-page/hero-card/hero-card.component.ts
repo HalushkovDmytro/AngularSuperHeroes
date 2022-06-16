@@ -27,8 +27,6 @@ export class HeroCardComponent implements OnInit{
     const selectedHero = this.heroesService.heroesArr.find((hero) => hero.id == target.id)
     const alreadySelected = this.heroesService.ownedHeroes.some((hero) => hero.id === selectedHero!.id)
     
-    this._cds.markForCheck()
-
     if (!alreadySelected) {
       this._setOwnedHeroes(selectedHero);
       this._checkIsOwned()
@@ -36,6 +34,8 @@ export class HeroCardComponent implements OnInit{
       this._removeFromOwned(target.id)
       this._checkIsOwned()
     }
+
+    this._cds.markForCheck()
   }
 
   public trySelected(id: string): boolean {
