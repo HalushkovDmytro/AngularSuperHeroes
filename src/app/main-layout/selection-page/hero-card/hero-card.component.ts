@@ -10,6 +10,7 @@ import { HeroInfoService } from "../../../hero-info-view/hero-info-service";
 })
 export class HeroCardComponent implements OnInit{
   @Input() hero!: any;
+  @Output() heroEvent: EventEmitter<any> = new EventEmitter<any>()
   public isOwned!: boolean;
 
   constructor(
@@ -27,15 +28,16 @@ export class HeroCardComponent implements OnInit{
     const selectedHero = this.heroesService.heroesArr.find((hero) => hero.id == target.id)
     const alreadySelected = this.heroesService.ownedHeroes.some((hero) => hero.id === selectedHero!.id)
     
+    this._checkIsOwned()
+    this.heroEvent.emit(selectedHero)
+    this._cds.markForCheck()
+
     if (!alreadySelected) {
       this._setOwnedHeroes(selectedHero);
-      this._checkIsOwned()
+      
     } else {
       this._removeFromOwned(target.id)
-      this._checkIsOwned()
     }
-
-    this._cds.markForCheck()
   }
 
   public trySelected(id: string): boolean {
