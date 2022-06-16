@@ -15,7 +15,7 @@ export class PowerUpService {
     ]
   }
 
-  static powerUptoLocalStorage(){
+  static powerUptoLocalStorage() {
     localStorage.setItem("powerUps", JSON.stringify(PowerUpService.initPowerUp()))
   }
 }
