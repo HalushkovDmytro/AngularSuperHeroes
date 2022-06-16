@@ -1,11 +1,12 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
 import { HeroesConfigService } from "../heroes.config.service";
 import { HeroInfoService } from "../../../hero-info-view/hero-info-service";
 
 @Component({
   selector: 'app-hero-card',
   templateUrl: './hero-card.component.html',
-  styleUrls: ['./hero-card.component.scss']
+  styleUrls: ['./hero-card.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush 
 })
 export class HeroCardComponent implements OnInit{
   @Input() hero!: any;
@@ -13,7 +14,8 @@ export class HeroCardComponent implements OnInit{
 
   constructor(
     public heroesService: HeroesConfigService,
-    public heroesInfoService: HeroInfoService
+    public heroesInfoService: HeroInfoService,
+    private _cds: ChangeDetectorRef
     ) { }
 
   public ngOnInit() {
@@ -24,6 +26,8 @@ export class HeroCardComponent implements OnInit{
     const target = event.target as HTMLInputElement
     const selectedHero = this.heroesService.heroesArr.find((hero) => hero.id == target.id)
     const alreadySelected = this.heroesService.ownedHeroes.some((hero) => hero.id === selectedHero!.id)
+    
+    this._cds.markForCheck()
 
     if (!alreadySelected) {
       this._setOwnedHeroes(selectedHero);
@@ -36,15 +40,18 @@ export class HeroCardComponent implements OnInit{
 
   public trySelected(id: string): boolean {
     const isSelected: string = this.heroesService.selectedHero?.id ? this.heroesService.selectedHero?.id : 'false'
-
+    
+    this._cds.markForCheck()
     return isSelected === id;
   }
 
   public tryOwned(id: string): boolean {
+    this._cds.markForCheck()
     return this.heroesService.ownedHeroes.some((hero) => hero.id === id);
   }
 
   private _setOwnedHeroes(hero: any): void {
+    this._cds.markForCheck()
     this.heroesService.ownedHeroes = [...this.heroesService.ownedHeroes, hero]
 
     const lastIndex = this.heroesService.ownedHeroes.length - 1;
@@ -58,6 +65,8 @@ export class HeroCardComponent implements OnInit{
   }
 
   private _removeFromOwned(id: string): void {
+    this._cds.markForCheck()
+    
     this.heroesService.ownedHeroes = this.heroesService.ownedHeroes.filter((item) => {
       return item.id !== id
     });
@@ -74,7 +83,9 @@ export class HeroCardComponent implements OnInit{
   }
 
   private _checkIsOwned(): boolean {
-      return this.isOwned = this.heroesService.ownedHeroes.some(item => item.id === this.hero.id)
+    this._cds.markForCheck()
+    
+    return this.isOwned = this.heroesService.ownedHeroes.some(item => item.id === this.hero.id)
   }
 
 }
