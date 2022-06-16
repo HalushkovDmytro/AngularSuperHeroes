@@ -41,17 +41,14 @@ export class HeroCardComponent implements OnInit{
   public trySelected(id: string): boolean {
     const isSelected: string = this.heroesService.selectedHero?.id ? this.heroesService.selectedHero?.id : 'false'
     
-    this._cds.markForCheck()
     return isSelected === id;
   }
 
   public tryOwned(id: string): boolean {
-    this._cds.markForCheck()
     return this.heroesService.ownedHeroes.some((hero) => hero.id === id);
   }
 
   private _setOwnedHeroes(hero: any): void {
-    this._cds.markForCheck()
     this.heroesService.ownedHeroes = [...this.heroesService.ownedHeroes, hero]
 
     const lastIndex = this.heroesService.ownedHeroes.length - 1;
@@ -65,7 +62,6 @@ export class HeroCardComponent implements OnInit{
   }
 
   private _removeFromOwned(id: string): void {
-    this._cds.markForCheck()
     
     this.heroesService.ownedHeroes = this.heroesService.ownedHeroes.filter((item) => {
       return item.id !== id
@@ -82,9 +78,7 @@ export class HeroCardComponent implements OnInit{
     );
   }
 
-  private _checkIsOwned(): boolean {
-    this._cds.markForCheck()
-    
+  private _checkIsOwned(): boolean {    
     return this.isOwned = this.heroesService.ownedHeroes.some(item => item.id === this.hero.id)
   }
 
