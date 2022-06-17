@@ -10,10 +10,9 @@ import { HttpClient } from "@angular/common/http";
   templateUrl: './hero-info-view.component.html',
   styleUrls: ['./hero-info-view.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
-
 })
 export class HeroInfoViewComponent implements OnInit {
-  public hero!: any;
+  public hero!: FetchResult;
 
   constructor(
     private _heroInfoService: HeroInfoService,
@@ -41,7 +40,7 @@ export class HeroInfoViewComponent implements OnInit {
   private _viewHero(response: Response): void {
         
     if (response.results) {
-      this.hero = response.results.find((hero: FetchResult) => hero.id === this._heroInfoService.heroId)
+      this.hero = response.results.find((hero: FetchResult) => hero.id === this._heroInfoService.heroId) as FetchResult;
     }
   }
 }
