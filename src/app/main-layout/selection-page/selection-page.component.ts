@@ -1,14 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, Validators } from '@angular/forms';
 import { UserValidators } from "../../validators";
 import { HeroesConfigService } from "./heroes.config.service";
-import { HttpClient } from "@angular/common/http";
-import { newArray } from "@angular/compiler/src/util";
 
 @Component({
   selector: 'app-selection-page',
   templateUrl: './selection-page.component.html',
-  styleUrls: ['./selection-page.component.scss']
+  styleUrls: ['./selection-page.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SelectionPageComponent implements OnInit {
   public recentSearch: Set<string> = new Set();
@@ -20,14 +19,14 @@ export class SelectionPageComponent implements OnInit {
   public get nameGetter(): AbstractControl | null {
     return this.form.get('heroSearch');
   }
-  
-  public get heroSearch(){
+
+  public get heroSearch(): string {
     return this.form.value.heroSearch
   }
+
   constructor(
     private _fb: FormBuilder,
     public heroesService: HeroesConfigService,
-    public http: HttpClient,
   ) {}
 
   private _initRecentSearch(): void {
@@ -62,7 +61,7 @@ export class SelectionPageComponent implements OnInit {
     if (this.form.invalid) {
       return
     }
-
+    
     this.heroesService.lastSearch = this.heroSearch;
     this.heroesService.getHeroes(this.heroSearch);
     this.addToRecentSearch(this.heroSearch);
@@ -72,5 +71,9 @@ export class SelectionPageComponent implements OnInit {
   public searchFromRecent(item: string): void {
     this.form.controls.heroSearch.setValue(item);
     this.submit();
+  }
+
+  public trackBy(index: number, item: string) {
+    return item
   }
 }

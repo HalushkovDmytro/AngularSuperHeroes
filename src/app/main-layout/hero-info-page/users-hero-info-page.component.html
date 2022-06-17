@@ -1,0 +1,29 @@
+<div class="hero-info-container">
+  <a
+    class="tab"
+    [class.active]="render === heroesList"
+    (click)="showUserHeroesList()"
+  >
+    User Heroes List
+  </a>
+  <a
+    class="tab"
+    [class.active]="render === battleList"
+    (click)="showBattlesHistory()"
+  >
+    Battles history
+  </a>
+  <a
+    class="tab"
+    [class.active]="render === powerups"
+    (click)="showPowerups()"
+  >
+    Powerups
+  </a>
+</div>
+
+<div [ngSwitch]="render" class="tab-inner">
+  <app-heroes-list *ngSwitchCase="heroesList"></app-heroes-list>
+  <app-battle-history-page *ngSwitchCase="battleList"></app-battle-history-page>
+  <app-power-ups *ngSwitchCase="powerups"></app-power-ups>
+</div>

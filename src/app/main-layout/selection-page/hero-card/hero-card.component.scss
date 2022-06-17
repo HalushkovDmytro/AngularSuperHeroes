@@ -3,6 +3,8 @@
   width: 500px;
 
   .hero {
+    display: flex;
+    flex-direction: column;
     background-color: rgba(255, 255, 255, 0.8);
     border-radius: 10px;
     border: 1px solid black;
@@ -44,6 +46,7 @@
         .hero-img {
           width: 200px;
           margin-bottom: 20px;
+          border-radius: 10px;
         }
 
         .block-btn {
@@ -58,8 +61,7 @@
             padding: 4px 8px;
             border: 1px solid transparent;
             border-radius: 10px;
-            background-color: #ed7e00;
-            color: #000;
+            color: #fff;
             transition: all .4s ease;
           }
 
@@ -67,6 +69,23 @@
             bottom: -15px;
             left: 0;
             cursor: pointer;
+            background-color: rgb(237, 126, 0);
+
+            &:hover {
+              color: #ffffff;
+              background-color: #ed3b05;
+            }
+
+            &:active {
+              border: 1px solid #fff;
+            }
+          }
+
+          .btn-view {
+            bottom: -15px;
+            right: 0;
+            cursor: pointer;
+            background-color: #ed7e00;
 
             &:hover {
               color: #ffffff;
@@ -87,8 +106,12 @@
           }
 
           .btn-owned {
-            bottom: -15px;
-            right: 0;
+            top: -85px;
+            left: -260px;
+            color: red;
+            background-color: transparent;
+            text-transform: uppercase;
+            font-weight: 700;
           }
         }
       }

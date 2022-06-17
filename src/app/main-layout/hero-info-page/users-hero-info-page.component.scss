@@ -1,0 +1,41 @@
+.hero-info-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 50px;
+
+  .tab {
+    text-align: center;
+    padding: 10px 20px;
+    border: 1px solid transparent;
+    margin: 0 20px;
+    min-width: 200px;
+    background-color: #0c57b3;
+    border-radius: 15px;
+    transition: background-color .4s ease;
+    text-transform: uppercase;
+    color: #fff;
+
+    &:hover {
+      background-color: rgb(21, 116, 241);
+    }
+
+    &:active {
+      background-color: rgb(21, 116, 241, .5);
+      border: 1px solid #fff;
+    }
+  }
+
+  .active {
+    background-color: rgba(93, 238, 55, 1);
+    color: #423939;
+  }
+}
+
+.tab-inner {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+

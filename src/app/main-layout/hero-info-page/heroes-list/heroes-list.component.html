@@ -1,0 +1,30 @@
+<div
+  *ngIf="!heroesService.ownedHeroes.length"
+  class="no-heroes"
+>
+ It looks like you have no owned heroes. <br>
+  You can add some by clicking "ADD" button! <br>
+
+  <button
+    class="add-new-hero-center"
+    (click)="goToSelectPage()"
+  >
+    Add new Hero
+  </button>
+</div>
+
+<div class="hero-list-container">
+  <app-hero-card
+    *ngFor="let ownedHero of heroesService.ownedHeroes; trackBy: trackBy"
+    class="hero-list"
+    [hero]="ownedHero"
+  ></app-hero-card>
+  <button
+    *ngIf="heroesService.ownedHeroes.length"
+    class="add-new-hero"
+    (click)="goToSelectPage()"
+  >
+    Add new Hero
+  </button>
+</div>
+

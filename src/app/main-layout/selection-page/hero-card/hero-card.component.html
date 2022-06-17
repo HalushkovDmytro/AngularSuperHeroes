@@ -1,5 +1,4 @@
 <div
-  *ngFor="let hero of heroesService.heroesArr"
   class="heroes-container"
      >
   <div
@@ -21,28 +20,35 @@
       <div class="hero-visual">
         <img
           class="hero-img"
-          [src]="hero.image.url"
+          [src]="hero.image"
           [alt]="hero.name"
         >
         <div class="block-btn">
-          <button 
-              class="btn btn-select" 
-              [id]="hero.id" 
+          <button
+              class="btn btn-select"
+              [id]="hero.id"
               (click)="selectHero($event)"
           >
-            Select
+            {{ isOwned ? 'Remove' : 'Select' }}
           </button>
-          <button 
-              *ngIf="trySelected(hero.id)" 
+
+          <button
+              *ngIf="trySelected(hero.id)"
               class="btn btn-selected"
           >
             Selected
           </button>
-          <button 
-              *ngIf="tryOwned(hero.id)" 
+          <button
+              *ngIf="tryOwned(hero.id)"
               class="btn btn-owned"
           >
             Owned
+          </button>
+          <button
+            class="btn btn-view"
+            (click)="heroesInfoService.redirectToHero(hero.id)"
+          >
+            View Hero
           </button>
         </div>
       </div>

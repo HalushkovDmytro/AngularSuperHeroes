@@ -1,0 +1,24 @@
+<div class="container">
+  <div
+    *ngIf="!powerUpsArray.length"
+    class="no-powerups-left"
+  >
+    There's no Power Ups left...
+  </div>
+  <div
+    *ngFor="let powerup of powerUpsArray; trackBy: trackBy"
+    class="power-up"
+  >
+    <img class="power-up-img" [src]="powerup.image" alt="{{ powerup.title }}">
+
+    <div class="power-up-subscribe">
+      <h2 class="power-up-title">{{ powerup.title }}</h2>
+      <div class="name-value-container">
+        <div class="power-up-name">{{ powerup.powerStatsName }}</div>
+        <div class="power-up-value">+{{ powerup.powerStatsValue }}</div>
+      </div>
+      <div class="uses-left" >Uses left: {{ powerup.usesLeft }}</div>
+    </div>
+  </div>
+
+</div>

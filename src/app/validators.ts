@@ -3,7 +3,6 @@ import { Regexp } from "./regexp";
 import { UsersService } from "./users.service";
 
 export class UserValidators {
-  private static _users: UsersService;
 
   static validEmail(control: AbstractControl): ValidationErrors | null {
     return Regexp.matchingEmail(control.value) ? null : {customEmail: true}
@@ -22,6 +21,6 @@ export class UserValidators {
   };
 
   static noMatchEmail(control: AbstractControl): ValidationErrors | null {
-    return this._users.allUsers.some((user) => user.email === control.value) ? { hasMatch: true } : null
+    return UsersService.allUsers.some((user) => user.email === control.value) ? { hasMatch: true } : null
   };
 }

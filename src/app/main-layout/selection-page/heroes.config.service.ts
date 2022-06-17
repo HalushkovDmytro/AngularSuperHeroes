@@ -1,51 +1,58 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { HeroInfo } from "../../interfaces";
+import { HeroInfo, Response } from "../../interfaces";
+import { Subscription } from "rxjs";
 
 @Injectable({providedIn: 'root'})
 export class HeroesConfigService {
-  public heroesArr!: any[];
-  public heroes!: HeroInfo[];
+  public heroesArr!: HeroInfo[];
+  public searchedHeroes!: HeroInfo[];
   public ownedHeroes!: HeroInfo[];
   public selectedHero!: HeroInfo;
   public lastSearch!: string;
   public noHeroError!: string;
 
-  constructor(public http: HttpClient) { }
+  constructor(private _http: HttpClient) { }
 
   public getUrl(searchValue: string): string {
-    return `https://superheroapi.com/api.php/5287932121267889/search/${searchValue}`;
+    return `https://halushkovdmytro.github.io/JSON-api/fake-data.json`;
   }
 
-  public getHeroes(value: string){
-    return this.http.get(this.getUrl(value))
+  public getHeroes(value: string): Subscription {
+    return this._http.get<Response>(this.getUrl(value))
       .subscribe((heroes) => {
-        this.showHeroes(heroes)
+        heroes = JSON.parse(JSON.stringify(heroes))
+        this._showHeroes(heroes)
       })
   }
 
-  public showHeroes(response: any): void {
+  private _showHeroes(response: any): void {
     const success: string = 'success'
-    
+
     if (response.response === success) {
-      this.heroesArr = response.results
       this.noHeroError = ''
-    } 
+      localStorage["currentUser"] = JSON.stringify({...JSON.parse(localStorage["currentUser"]), searchedHeroes: response.results })
+      this.heroesArr = JSON.parse(localStorage["currentUser"]).searchedHeroes
+    }
 
      this.noHeroError = response.error
   }
 
   public initOwnedHeroes(): void {
     this.ownedHeroes = JSON.parse(localStorage['currentUser']).ownedHeroes
-      ? JSON.parse(localStorage['currentUser']).ownedHeroes : []
+      ? JSON.parse(localStorage['currentUser']).ownedHeroes : [];
   }
 
   public initSelectedHero(): void {
-    this.selectedHero = JSON.parse(localStorage['currentUser'])?.selectedHero
+    this.selectedHero = JSON.parse(localStorage['currentUser'])?.selectedHero;
   }
 
   public initLastSearchLocalStorage(): void {
     this.lastSearch = JSON.parse(localStorage["currentUser"])?.lastSearch;
+  }
+
+  public initSearchedHeroes(): void {
+    this.heroesArr = JSON.parse(localStorage["currentUser"])?.searchedHeroes;
   }
 
 }
