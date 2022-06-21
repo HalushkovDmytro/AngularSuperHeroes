@@ -18,7 +18,6 @@ export class HeroCardComponent implements OnInit {
     public heroesService: HeroesConfigService,
     public heroesInfoService: HeroInfoService,
     public battleService: BattleService,
-
 ) { }
 
   public ngOnInit(): void {
@@ -51,7 +50,7 @@ export class HeroCardComponent implements OnInit {
   }
 
   private _setOwnedHeroes(hero: any): void {
-    this.heroesService.ownedHeroes = [...this.heroesService.ownedHeroes, hero]
+    this.heroesService.ownedHeroes = [...this.heroesService.ownedHeroes, hero;
 
     const lastIndex = this.heroesService.ownedHeroes.length - 1;
 
