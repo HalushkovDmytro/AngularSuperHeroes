@@ -29,7 +29,7 @@ export class CreateUserPageComponent implements OnInit {
     return this.form.get('userName');
   };
 
-  constructor(private _users: UsersService) {}
+  constructor(private _usersService: UsersService) {}
 
   public ngOnInit(): void {
     this.createForm();
@@ -40,7 +40,7 @@ export class CreateUserPageComponent implements OnInit {
       email: new FormControl('', [
         Validators.required,
         UserValidators.validEmail,
-        UserValidators.noMatchEmail
+        UserValidators.noMatchEmail(this._usersService.allUsers)
       ]),
       password: new FormControl('', [
         Validators.required,
@@ -72,11 +72,11 @@ export class CreateUserPageComponent implements OnInit {
   };
 
   private _addUser(user: UsersData): void {
-    const allUsersArray: UsersData[] = UsersService.allUsers
-    const sameUser: boolean = allUsersArray.some((item) => item.email === user.email);
+    let allUsersArray: UsersData[] = this._usersService.allUsers
+    const sameUser: boolean = allUsersArray.some( (item: UsersData) => item.email === user.email);
 
     if (!sameUser) {
-      allUsersArray.push(user);
+      allUsersArray = [...allUsersArray, user]
       localStorage['users'] = JSON.stringify(allUsersArray);
     }
   };

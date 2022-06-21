@@ -18,11 +18,11 @@ export class HeroesListComponent {
     ) {}
 
   public goToSelectPage(): void {
-    this._router.navigate(['main/selection-page']);
-    window.scrollTo(0, 0);
+    this._router.navigate(['main/selection-page'])
+      .then(() => window.scrollTo(0, 0) );
   }
 
-  public trackBy(index: number, item: any): HeroInfo {
-    return item
+  public trackBy(index: number, item: HeroInfo): string {
+    return item.id;
   }
 }

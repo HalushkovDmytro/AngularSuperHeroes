@@ -22,19 +22,43 @@
       height: 50px;
       margin-bottom: 50px;
 
-      .logo-container p {
-        color: #fff;
-        font-size: 18px;
-        font-weight: 700;
+      .logo-container {
+        width: 20%;
+
+        p {
+          color: #fff;
+          font-size: 18px;
+          font-weight: 700;
+        }
+      }
+
+      .fight-container {
+        flex: 6;
+        text-align: center;
+
+        .fight-battle {
+          color: #fff;
+          font-size: 20px;
+          font-weight: bold;
+          background-color: red;
+          padding: 5px 30px;
+          border-radius: 15px;
+          transition: all .4s ease;
+          margin: 0 auto;
+
+          &:hover {
+            background-color: #0c57b3;
+          }
+        }
       }
 
       .info-block {
         display: flex;
         justify-content: space-between;
         align-items: center;
-        width: 180px;
         font-size: 18px;
         color: #fff;
+        width: 20%;
 
         .user-info {
           border: 1px solid transparent;

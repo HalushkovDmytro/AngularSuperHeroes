@@ -7,6 +7,7 @@ import { AuthGuard } from "./auth.guard";
 import { SelectionPageComponent } from "./main-layout/selection-page/selection-page.component";
 import { UsersHeroInfoPageComponent } from "./main-layout/hero-info-page/users-hero-info-page.component";
 import { HeroInfoViewComponent } from "./hero-info-view/hero-info-view.component";
+import { BattlePageComponent } from "./main-layout/battle-page/battle-page.component";
 
 
 const routes: Routes = [
@@ -16,7 +17,8 @@ const routes: Routes = [
   {path: 'main', component: MainLayoutComponent, canActivate: [AuthGuard], children: [
       {path: 'selection-page', component: SelectionPageComponent},
       {path: 'users-info', component: UsersHeroInfoPageComponent},
-      {path: 'hero-info', component: HeroInfoViewComponent}
+      {path: 'hero-info', component: HeroInfoViewComponent},
+      {path: 'battle', component: BattlePageComponent}
     ]},
 ];
 

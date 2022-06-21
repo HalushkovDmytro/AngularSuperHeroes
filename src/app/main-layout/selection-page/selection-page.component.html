@@ -50,7 +50,7 @@
       *ngIf="!heroesService.noHeroError; else heroError"
     >
       <app-hero-card
-        *ngFor="let hero of heroesService.heroesArr; trackBy: trackBy"
+        *ngFor="let hero of heroesService.heroesArr; trackBy: trackByFn"
         [hero] ="hero"
       ></app-hero-card>
     </div>

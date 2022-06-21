@@ -1,6 +1,7 @@
 import { AbstractControl, ValidationErrors } from "@angular/forms";
 import { Regexp } from "./regexp";
 import { UsersService } from "./users.service";
+import { UsersData } from "./interfaces";
 
 export class UserValidators {
 
@@ -20,7 +21,9 @@ export class UserValidators {
     return Regexp.matchingHeroSearch(control.value) ? null : { invalidName: true }
   };
 
-  static noMatchEmail(control: AbstractControl): ValidationErrors | null {
-    return UsersService.allUsers.some((user) => user.email === control.value) ? { hasMatch: true } : null
+  static noMatchEmail(usersList: UsersData[]): (control: AbstractControl) => ValidationErrors | null {
+    return (control: AbstractControl) => {
+      return usersList.some((user: UsersData) => user.email === control.value) ? { hasMatch: true } : null
+    }
   };
 }

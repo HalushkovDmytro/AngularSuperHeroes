@@ -6,7 +6,7 @@
     There's no Power Ups left...
   </div>
   <div
-    *ngFor="let powerup of powerUpsArray; trackBy: trackBy"
+    *ngFor="let powerup of powerUpsArray; trackBy: trackByFn"
     class="power-up"
   >
     <img class="power-up-img" [src]="powerup.image" alt="{{ powerup.title }}">

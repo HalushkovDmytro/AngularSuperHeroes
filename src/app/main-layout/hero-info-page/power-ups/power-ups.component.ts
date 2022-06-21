@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { PowerUp } from "../../../interfaces";
 
 @Component({
@@ -9,14 +9,22 @@ import { PowerUp } from "../../../interfaces";
 })
 export class PowerUpsComponent implements OnInit {
 
-  public powerUpsArray: PowerUp[] = JSON.parse(localStorage["powerUps"]);
-  
+  public powerUpsArray!: PowerUp[];
+
   public ngOnInit(): void {
-    this.powerUpsArray.sort((a,b) => b.usesLeft - a.usesLeft)
-  }
-  
-  public trackBy(index: number, item: any): PowerUp {
-    return item
+    this.initPowerUpsArray();
+    this._sortPowerUps();
   }
 
+  public initPowerUpsArray() {
+    return this.powerUpsArray = JSON.parse(localStorage["powerUps"]);
+  }
+
+  public trackByFn(index: number, item: PowerUp): string {
+    return item.title;
+  }
+
+  private _sortPowerUps(): void {
+    this.powerUpsArray.sort((a,b) => b.usesLeft - a.usesLeft);
+  }
 }
