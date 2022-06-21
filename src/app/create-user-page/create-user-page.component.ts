@@ -73,7 +73,7 @@ export class CreateUserPageComponent implements OnInit {
 
   private _addUser(user: UsersData): void {
     let allUsersArray: UsersData[] = this._usersService.allUsers
-    const sameUser: boolean = allUsersArray.some((item:UsersData) => item.email === user.email);
+    const sameUser: boolean = allUsersArray.some( (item: UsersData) => item.email === user.email);
 
     if (!sameUser) {
       allUsersArray = [...allUsersArray, user]
