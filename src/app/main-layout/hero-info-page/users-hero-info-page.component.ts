@@ -8,22 +8,25 @@ import { HeroInfo } from "../../interfaces";
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class UsersHeroInfoPageComponent {
-  @Input() hero!: HeroInfo
+  @Input() hero!: HeroInfo;
 
   public heroesList: string = 'heroes';
   public battleList: string = 'battle';
   public powerups: string = 'powerups';
-  render: string = this.heroesList;
+  public render: string = this.heroesList;
+
+  constructor() {
+  }
 
   public showUserHeroesList(): void {
-    this.render = this.heroesList
+    this.render = this.heroesList;
   }
 
   public showBattlesHistory(): void {
-    this.render = this.battleList
+    this.render = this.battleList;
   }
 
   public showPowerups(): void {
-    this.render = this.powerups
+    this.render = this.powerups;
   }
 }

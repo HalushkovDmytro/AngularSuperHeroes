@@ -1,53 +1,53 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { HeroesConfigService } from "../heroes.config.service";
 import { HeroInfoService } from "../../../hero-info-view/hero-info-service";
+import { HeroInfo } from "../../../interfaces";
+import { BattleService } from "../../battle-page/battle-service";
 
 @Component({
   selector: 'app-hero-card',
   templateUrl: './hero-card.component.html',
   styleUrls: ['./hero-card.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush 
+
 })
-export class HeroCardComponent implements OnInit{
-  @Input() hero!: any;
-  @Output() heroEvent: EventEmitter<any> = new EventEmitter<any>()
+export class HeroCardComponent implements OnInit {
+  @Input() hero!: HeroInfo;
   public isOwned!: boolean;
 
   constructor(
     public heroesService: HeroesConfigService,
     public heroesInfoService: HeroInfoService,
-    private _cds: ChangeDetectorRef
-    ) { }
+    public battleService: BattleService,
 
-  public ngOnInit() {
-    this._checkIsOwned()
+) { }
+
+  public ngOnInit(): void {
+    this._checkIsOwned();
   }
 
-  public selectHero(event: Event): void {
-    const target = event.target as HTMLInputElement
-    const selectedHero = this.heroesService.heroesArr.find((hero) => hero.id == target.id)
-    const alreadySelected = this.heroesService.ownedHeroes.some((hero) => hero.id === selectedHero!.id)
-    
-    this._checkIsOwned()
-    this.heroEvent.emit(selectedHero)
-    this._cds.markForCheck()
+  public selectHero(id: string): void {
+    const selectedHero = this.heroesService.heroesArr.find((hero: HeroInfo) => hero.id === id);
+    const alreadySelected = this.heroesService.ownedHeroes.some((hero: HeroInfo) => hero.id === selectedHero!.id);
+
 
     if (!alreadySelected) {
       this._setOwnedHeroes(selectedHero);
-      
     } else {
-      this._removeFromOwned(target.id)
+      this._removeFromOwned(id);
     }
+
+    this._checkIsOwned();
+    this.battleService.initEnemyHero(id);
   }
 
   public trySelected(id: string): boolean {
-    const isSelected: string = this.heroesService.selectedHero?.id ? this.heroesService.selectedHero?.id : 'false'
-    
+    const isSelected: string = this.heroesService.selectedHero?.id ? this.heroesService.selectedHero?.id : 'false';
+
     return isSelected === id;
   }
 
   public tryOwned(id: string): boolean {
-    return this.heroesService.ownedHeroes.some((hero) => hero.id === id);
+    return this.heroesService.ownedHeroes.some((hero: HeroInfo) => hero.id === id);
   }
 
   private _setOwnedHeroes(hero: any): void {
@@ -56,32 +56,31 @@ export class HeroCardComponent implements OnInit{
     const lastIndex = this.heroesService.ownedHeroes.length - 1;
 
     this.heroesService.selectedHero = this.heroesService.ownedHeroes[lastIndex];
-    localStorage["currentUser"] = JSON.stringify(
-      {...JSON.parse(localStorage["currentUser"]),
-        ownedHeroes: [...this.heroesService.ownedHeroes],
-        selectedHero: this.heroesService.selectedHero}
-    );
+    this._refreshCurrentUser();
   }
 
   private _removeFromOwned(id: string): void {
-    
-    this.heroesService.ownedHeroes = this.heroesService.ownedHeroes.filter((item) => {
-      return item.id !== id
+    this.heroesService.ownedHeroes = this.heroesService.ownedHeroes.filter((hero: HeroInfo) => {
+      return hero.id !== id;
     });
 
     const lastIndex = this.heroesService.ownedHeroes.length - 1;
 
     this.heroesService.selectedHero = this.heroesService.ownedHeroes[lastIndex];
+    this._refreshCurrentUser();
+  }
+
+  private _refreshCurrentUser(): void {
     localStorage['currentUser'] = JSON.stringify(
       {...JSON.parse(localStorage['currentUser']),
-        ownedHeroes: this.heroesService.ownedHeroes,
+        ownedHeroes: [...this.heroesService.ownedHeroes],
         selectedHero: this.heroesService.selectedHero
       }
     );
   }
 
-  private _checkIsOwned(): boolean {    
-    return this.isOwned = this.heroesService.ownedHeroes.some(item => item.id === this.hero.id)
+  private _checkIsOwned(): boolean {
+    return this.isOwned = this.heroesService.ownedHeroes.some((item: HeroInfo) => item.id === this.hero.id);
   }
 
 }

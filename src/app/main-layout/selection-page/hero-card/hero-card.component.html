@@ -26,8 +26,7 @@
         <div class="block-btn">
           <button
               class="btn btn-select"
-              [id]="hero.id"
-              (click)="selectHero($event)"
+                  (click)="selectHero(hero.id)"
           >
             {{ isOwned ? 'Remove' : 'Select' }}
           </button>

@@ -5,6 +5,7 @@ import { UserValidators } from "../validators";
 import { AuthService } from "../auth.service";
 import { UsersService } from "../users.service";
 import { PowerUpService } from "../power-up.service";
+import { UsersData } from "../interfaces";
 
 @Component({
   selector: 'app-login-page',
@@ -38,8 +39,9 @@ export class LoginPageComponent implements OnInit {
     private _auth: AuthService,
     private _router: Router,
     private _route: ActivatedRoute,
-    private _users: UsersService,
-    private _cd: ChangeDetectorRef
+    private _usersService: UsersService,
+    private _cd: ChangeDetectorRef,
+    private _powerUpService: PowerUpService
   ){}
 
   public ngOnInit(): void {
@@ -78,18 +80,18 @@ export class LoginPageComponent implements OnInit {
     if (this._registeredUser(this.formValue.email, this.formValue.password)) {
       this._auth.login(this.formValue);
       this._router.navigate(['/main/selection-page']);
-      PowerUpService.powerUptoLocalStorage()
+      this._powerUpService.saveToLocalStorage();
     } else {
       this.invalidEnter = true;
       setTimeout(() => {
         this.invalidEnter = false;
-        this._cd.markForCheck()
-      }, 2000)
+        this._cd.markForCheck();
+      }, 2000);
     }
   }
 
   private _registeredUser(email: string, password: string): boolean {
-    return UsersService.allUsers.some((item) => item.email === email && item.password === password);
+    return this._usersService.allUsers.some((item: UsersData) => item.email === email && item.password === password);
   }
 
 }

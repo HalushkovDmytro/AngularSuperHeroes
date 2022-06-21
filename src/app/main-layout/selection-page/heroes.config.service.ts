@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { HeroInfo, Response } from "../../interfaces";
-import { Subscription } from "rxjs";
+import { Observable } from "rxjs";
 
 @Injectable({providedIn: 'root'})
 export class HeroesConfigService {
@@ -14,28 +14,20 @@ export class HeroesConfigService {
 
   constructor(private _http: HttpClient) { }
 
-  public getUrl(searchValue: string): string {
-    return `https://halushkovdmytro.github.io/JSON-api/fake-data.json`;
+  public getHeroes(value: string): Observable<Response> {
+    return this._http.get<Response>(this._getUrl(value));
   }
 
-  public getHeroes(value: string): Subscription {
-    return this._http.get<Response>(this.getUrl(value))
-      .subscribe((heroes) => {
-        heroes = JSON.parse(JSON.stringify(heroes))
-        this._showHeroes(heroes)
-      })
-  }
-
-  private _showHeroes(response: any): void {
-    const success: string = 'success'
+  public showHeroes(response: any): void {
+    const success: string = 'success';
 
     if (response.response === success) {
-      this.noHeroError = ''
-      localStorage["currentUser"] = JSON.stringify({...JSON.parse(localStorage["currentUser"]), searchedHeroes: response.results })
-      this.heroesArr = JSON.parse(localStorage["currentUser"]).searchedHeroes
+      this.noHeroError = '';
+      localStorage["currentUser"] = JSON.stringify({...JSON.parse(localStorage["currentUser"]), searchedHeroes: response.results });
+      this.heroesArr = JSON.parse(localStorage["currentUser"]).searchedHeroes;
     }
 
-     this.noHeroError = response.error
+     this.noHeroError = response.error;
   }
 
   public initOwnedHeroes(): void {
@@ -55,4 +47,7 @@ export class HeroesConfigService {
     this.heroesArr = JSON.parse(localStorage["currentUser"])?.searchedHeroes;
   }
 
+  private _getUrl(searchValue: string): string {
+    return `https://halushkovdmytro.github.io/JSON-api/fake-data.json`;
+  }
 }

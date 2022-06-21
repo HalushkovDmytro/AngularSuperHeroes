@@ -18,6 +18,7 @@ import { HeroesListComponent } from './main-layout/hero-info-page/heroes-list/he
 import { BattleHistoryPageComponent } from './main-layout/hero-info-page/battle-history-page/battle-history-page.component';
 import { PowerUpsComponent } from './main-layout/hero-info-page/power-ups/power-ups.component';
 import { HeroInfoViewComponent } from './hero-info-view/hero-info-view.component';
+import { BattlePageComponent } from './main-layout/battle-page/battle-page.component';
 
 @NgModule({
   declarations: [
@@ -34,15 +35,16 @@ import { HeroInfoViewComponent } from './hero-info-view/hero-info-view.component
     BattleHistoryPageComponent,
     PowerUpsComponent,
     HeroInfoViewComponent,
+    BattlePageComponent,
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpClientModule,
     AppRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
   ],
-  providers: [AuthService],
+  providers: [AuthService, PowerUpsComponent, BattlePageComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

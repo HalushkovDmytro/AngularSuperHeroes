@@ -5,10 +5,6 @@ import { UsersData } from "./interfaces";
 export class AuthService {
   private _isLogged: boolean = false
 
-  private _currentUserInit(usersData: UsersData): void {
-    localStorage.currentUser = JSON.stringify({...usersData, 'expiredSession': Date.now() + 3600000}) //1hour
-  }
-
   public login(usersData: UsersData): void {
     this._currentUserInit(usersData);
     this._isLogged = true;
@@ -17,6 +13,7 @@ export class AuthService {
   public logout(): void {
     this._isLogged = false;
     localStorage.removeItem('currentUser');
+    localStorage.removeItem('powerUps');
   }
 
   public isAuthenticated(): boolean {
@@ -33,5 +30,9 @@ export class AuthService {
 
   private _isExpired(): boolean {
     return Date.now() > +JSON.parse(localStorage.getItem('currentUser')!).expiredSession ;
+  }
+
+  private _currentUserInit(usersData: UsersData): void {
+    localStorage.currentUser = JSON.stringify({...usersData, 'expiredSession': Date.now() + 3600000}) //1hour
   }
 }

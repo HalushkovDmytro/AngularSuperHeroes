@@ -7,7 +7,7 @@ export interface HeroInfo {
   id: string;
   name: string;
   image: string;
-  powerStats: PowerStats;
+  powerstats: PowerStats;
 }
 
 export interface PowerStats {
@@ -25,6 +25,7 @@ export interface PowerUp {
   powerStatsValue: string;
   usesLeft: number;
   image: string;
+  selected: boolean;
 }
 
 export interface BattleInfo {
@@ -34,6 +35,11 @@ export interface BattleInfo {
   enemyName: string;
   enemyId: string;
   battleResult: string;
+}
+
+export interface BattleScore {
+  usersScore: number;
+  enemyScore: number;
 }
 
 export interface Response {
@@ -69,7 +75,7 @@ export interface Biography {
 
 export interface Connections {
   "group-affiliation": string;
-  relatives: string[] | string | null
+  relatives: string[] | string | null;
 }
 
 export interface Work {

@@ -1,0 +1,93 @@
+<div class="container">
+
+  <div *ngIf="showLoading" class="loading">
+
+    <div class="app-loading">
+      <div class="logo"></div>
+      <svg class="spinner" viewBox="25 25 50 50">
+        <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="3" stroke-miterlimit="10"/>
+      </svg>
+      <svg class="spinner2" viewBox="25 25 50 50">
+        <circle class="path2" cx="50" cy="50" r="20" fill="none" stroke-width="3" stroke-miterlimit="10"/>
+      </svg>
+    </div>
+
+  </div>
+
+  <div
+    *ngIf="showModal"
+    class="modal-result"
+    (click)="showModal = !showModal"
+  >
+    <div class="modal-content">
+      <p class="date">
+        {{ this.battleService.currentBattleInfo.battleDate | date : 'medium' }}
+      </p>
+      <div class="names">
+        <p class="hero-name">
+          {{ this.battleService.currentBattleInfo.heroName }}</p>
+        <p class="enemy-name">{{ this.battleService.currentBattleInfo.enemyName }}
+        </p>
+      </div>
+      <div class="battle-result">
+        {{ this.battleService.currentBattleInfo.battleResult }}
+      </div>
+    </div>
+  </div>
+
+  <div class="selected-hero hero">
+    <img class="hero-avatar" [src]="this.battleService.usersHero.image" [alt]="this.battleService.usersHero.name" >
+    <div class="hero-stats">
+      <h3 class="hero-name" (click)="this.heroInfoService.redirectToHero(this.battleService.usersHero.id)">{{ this.battleService.usersHero.name }}</h3>
+      <p>combat: {{ this.battleService.usersHero.powerstats.combat }}</p>
+      <p>durability: {{ this.battleService.usersHero.powerstats.durability }}</p>
+      <p>intelligence: {{ this.battleService.usersHero.powerstats.intelligence }}</p>
+      <p>power: {{ this.battleService.usersHero.powerstats.power }}</p>
+      <p>speed: {{ this.battleService.usersHero.powerstats.speed }}</p>
+      <p>strength: {{ this.battleService.usersHero.powerstats.strength }}</p>
+    </div>
+  </div>
+
+  <div class="center">
+
+    <div class="fight-about">
+      <h2>{{ this.battleService.usersHero.name }}</h2>
+      <button class="fight-btn" (click)="battle()">VS</button>
+      <h2>{{ this.battleService.enemyHero.name }}</h2>
+    </div>
+
+    <div class="powerups-container">
+      <a
+        *ngFor="let powerup of battleService.powerUps; trackBy: trackByFn"
+        class="powerup"
+        (click)="this.battleService.checkPowerUp(powerup.title)"
+        [class.selected]="powerup.selected"
+      >
+        <h2
+          class="power-up-title"
+        >{{ powerup.title }}</h2>
+        <div class="name-value-container">
+          <p class="power-up-name">{{ powerup.powerStatsName }}</p>
+          <p class="power-up-value">+{{ powerup.powerStatsValue }}</p>
+        </div>
+        <div class="uses-left" >Uses left: {{ powerup.usesLeft }}</div>
+      </a>
+    </div>
+
+  </div>
+
+  <div class="enemy-hero hero">
+    <img [src]="this.battleService.enemyHero.image" [alt]="this.battleService.enemyHero.name" class="hero-avatar">
+    <div class="hero-stats">
+      <h3 class="hero-name" (click)="this.heroInfoService.redirectToHero(this.battleService.enemyHero.id)" >{{ this.battleService.enemyHero.name }}</h3>
+      <p>combat: {{ this.battleService.enemyHero.powerstats.combat }} </p>
+      <p>durability: {{ this.battleService.enemyHero.powerstats.durability }} </p>
+      <p>intelligence: {{ this.battleService.enemyHero.powerstats.intelligence }} </p>
+      <p>power: {{ this.battleService.enemyHero.powerstats.power }} </p>
+      <p>speed: {{ this.battleService.enemyHero.powerstats.speed }} </p>
+      <p>strength: {{ this.battleService.enemyHero.powerstats.strength }} </p>
+    </div>
+  </div>
+
+</div>
+

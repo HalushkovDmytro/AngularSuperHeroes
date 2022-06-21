@@ -2,7 +2,6 @@ import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@
 import { HeroInfoService } from "./hero-info-service";
 import { HeroesConfigService } from "../main-layout/selection-page/heroes.config.service";
 import { FetchResult, Response } from "../interfaces";
-import { Subscription } from "rxjs";
 import { HttpClient } from "@angular/common/http";
 
 @Component({
@@ -25,22 +24,16 @@ export class HeroInfoViewComponent implements OnInit {
     this._getHeroes();
   }
 
-  private _getUrl(): string {
-    return `https://halushkovdmytro.github.io/JSON-api/fake-data.json`;
+  private _getHeroes() {
+    this._heroInfoService.getHeroes()
+      .subscribe((heroes: Response) => {
+      this._viewHero(heroes);
+      this._cd.markForCheck();
+    })
   }
-
-  private _getHeroes(): Subscription {
-    return this._http.get<Response>(this._getUrl())
-      .subscribe((heroes) => {
-        this._viewHero(heroes)
-        this._cd.markForCheck()
-      })
-  }
-
   private _viewHero(response: Response): void {
-        
     if (response.results) {
-      this.hero = response.results.find((hero: FetchResult) => hero.id === this._heroInfoService.heroId) as FetchResult;
+      this.hero = response.results.find( (hero: FetchResult) => hero.id === this._heroInfoService.heroId) as FetchResult;
     }
   }
 }
