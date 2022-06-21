@@ -69,11 +69,13 @@ export class SelectionPageComponent implements OnInit {
   }
 
   private _initRecentSearch(): void {
-    if (!localStorage["recentSearch"]) {
+    const recentSearch = localStorage["recentSearch"];
+    
+    if (!recentSearch) {
       return;
     }
 
-    JSON.parse(localStorage["recentSearch"]).forEach((item: string) => this.recentSearch.add(item));
+    JSON.parse(recentSearch).forEach((item: string) => this.recentSearch.add(item));
   }
 
   private _setLastSearch(): void {
