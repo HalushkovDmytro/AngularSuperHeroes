@@ -18,7 +18,7 @@ export class HeroesConfigService {
     return this._http.get<Response>(this._getUrl(value));
   }
 
-  public showHeroes(response: any): void {
+  public showHeroes(response: Response): void {
     const success: string = 'success';
 
     if (response.response === success) {
@@ -27,7 +27,7 @@ export class HeroesConfigService {
       this.heroesArr = JSON.parse(localStorage["currentUser"]).searchedHeroes;
     }
 
-     this.noHeroError = response.error;
+     this.noHeroError = response.error!;
   }
 
   public initOwnedHeroes(): void {
