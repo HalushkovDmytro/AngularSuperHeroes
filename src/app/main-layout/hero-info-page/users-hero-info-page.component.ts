@@ -15,9 +15,6 @@ export class UsersHeroInfoPageComponent {
   public powerups: string = 'powerups';
   public render: string = this.heroesList;
 
-  constructor() {
-  }
-
   public showUserHeroesList(): void {
     this.render = this.heroesList;
   }
