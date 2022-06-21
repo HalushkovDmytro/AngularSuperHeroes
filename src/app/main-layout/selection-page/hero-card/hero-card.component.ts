@@ -25,8 +25,8 @@ export class HeroCardComponent implements OnInit {
   }
 
   public selectHero(id: string): void {
-    const selectedHero = this.heroesService.heroesArr.find((hero: HeroInfo) => hero.id === id);
-    const alreadySelected = this.heroesService.ownedHeroes.some((hero: HeroInfo) => hero.id === selectedHero!.id);
+    const selectedHero = this.heroesService.heroesArr.find( (hero: HeroInfo) => hero.id === id);
+    const alreadySelected = this.heroesService.ownedHeroes.some( (hero: HeroInfo) => hero.id === selectedHero!.id);
 
 
     if (!alreadySelected) {
@@ -46,7 +46,7 @@ export class HeroCardComponent implements OnInit {
   }
 
   public tryOwned(id: string): boolean {
-    return this.heroesService.ownedHeroes.some((hero: HeroInfo) => hero.id === id);
+    return this.heroesService.ownedHeroes.some( (hero: HeroInfo) => hero.id === id);
   }
 
   private _setOwnedHeroes(hero: any): void {
@@ -59,7 +59,7 @@ export class HeroCardComponent implements OnInit {
   }
 
   private _removeFromOwned(id: string): void {
-    this.heroesService.ownedHeroes = this.heroesService.ownedHeroes.filter((hero: HeroInfo) => {
+    this.heroesService.ownedHeroes = this.heroesService.ownedHeroes.filter( (hero: HeroInfo) => {
       return hero.id !== id;
     });
 
@@ -79,7 +79,7 @@ export class HeroCardComponent implements OnInit {
   }
 
   private _checkIsOwned(): boolean {
-    return this.isOwned = this.heroesService.ownedHeroes.some((item: HeroInfo) => item.id === this.hero.id);
+    return this.isOwned = this.heroesService.ownedHeroes.some( (item: HeroInfo) => item.id === this.hero.id);
   }
 
 }
