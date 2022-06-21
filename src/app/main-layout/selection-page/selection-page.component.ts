@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, Validators } from '@angular/forms';
 import { UserValidators } from "../../validators";
 import { HeroesConfigService } from "./heroes.config.service";
-import { HeroInfo } from "../../interfaces";
+import { HeroInfo, Response } from "../../interfaces";
 
 @Component({
   selector: 'app-selection-page',
@@ -42,7 +42,7 @@ export class SelectionPageComponent implements OnInit {
 
   public getHeroes(value: string) {
     this.heroesService.getHeroes(value)
-      .subscribe((heroes: any) => {
+      .subscribe((heroes: Response): void => {
         heroes = JSON.parse(JSON.stringify(heroes));
         this.heroesService.showHeroes(heroes);
       })
