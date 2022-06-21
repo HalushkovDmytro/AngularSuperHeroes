@@ -43,24 +43,24 @@ export class BattleHistoryPageComponent implements OnInit {
     switch (sortBy) {
 
       case 'date':
-        this.battleList.sort((a,b) => a.battleDate - b.battleDate)
+        this.battleList.sort((a,b) => a.battleDate - b.battleDate);
         break;
 
       case 'heroName':
-        this.battleList.sort((a, b) => a.heroName.localeCompare(b.heroName))
+        this.battleList.sort((a, b) => a.heroName.localeCompare(b.heroName));
         break;
 
       case 'enemyName':
-        this.battleList.sort((a, b) => a.enemyName.localeCompare(b.enemyName))
+        this.battleList.sort((a, b) => a.enemyName.localeCompare(b.enemyName));
         break;
 
       case 'battleResult':
-        this.battleList.sort((a, b) => b.battleResult.localeCompare(a.battleResult))
+        this.battleList.sort((a, b) => b.battleResult.localeCompare(a.battleResult));
         break;
     }
   }
 
   private _initBattleList() {
-    this.battleList = JSON.parse(localStorage["currentUser"]).battleList
+    this.battleList = JSON.parse(localStorage["currentUser"]).battleList;
   }
 }
