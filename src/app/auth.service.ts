@@ -33,6 +33,6 @@ export class AuthService {
   }
 
   private _currentUserInit(usersData: UsersData): void {
-    localStorage.currentUser = JSON.stringify({...usersData, 'expiredSession': Date.now() + 3600000}) //1hour
+    localStorage.currentUser = JSON.stringify({...usersData, 'expiredSession': Date.now() + 3600000});
   }
 }
